@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>simpleappsdev — small apps that do one thing each</title>
+<meta name="description" content="A portfolio of small, paid iPhone apps. Each one does a single thing.">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top themed" style="--accent-l:#FF7A00;--accent-d:#FF8F2A">
+    <a href="./">simpleappsdev</a><span class="dot"></span>
+  </header>
+  <main>
+    <h1 class="site-line">Small apps that do one thing each.</h1>
+    <nav class="grid" id="grid" aria-label="Apps"></nav>
+  </main>
+  <footer class="foot" id="foot"></footer>
+</div>
+<script>
+fetch('apps.json').then(function(r){ return r.json(); }).then(function(data){
+  var grid = document.getElementById('grid');
+  data.apps.forEach(function(app){
+    var a = document.createElement('a');
+    a.className = 'card themed';
+    a.href = app.url;
+    a.style.setProperty('--accent-l', app.accentLight);
+    a.style.setProperty('--accent-d', app.accentDark);
+    var tile = app.icon
+      ? '<img class="tile" src="' + app.icon + '" alt="" width="64" height="64">'
+      : '<span class="tile" aria-hidden="true">' + app.name + '</span>';
+    a.innerHTML = tile +
+      '<span class="card-body">' +
+        '<span class="card-name">' + app.name + '</span>' +
+        '<span class="card-tag">' + app.tagline + '</span>' +
+        '<span class="card-price">' + app.price + '</span>' +
+      '</span>';
+    grid.appendChild(a);
+  });
+  document.getElementById('foot').innerHTML =
+    '<a href="' + data.instagram + '">Instagram</a>' +
+    '<a href="mailto:' + data.supportEmail + '">' + data.supportEmail + '</a>';
+});
+</script>
+</body>
+</html>

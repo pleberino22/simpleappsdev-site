@@ -1,0 +1,278 @@
+/* simpleappsdev — one shared stylesheet. Every color and space is a token;
+   a new app changes nothing here: it brings its accents via --accent-l / --accent-d. */
+
+:root {
+  /* palette */
+  --paper: #FAFAF9;
+  --ink: #1C1A17;
+  --coal: #141311;
+  --bone: #E9E6E1;
+  --smoke: #8A857D;
+  /* per-app accent slots (overridden inline from apps.json) */
+  --accent-l: #1C1A17;
+  --accent-d: #F2F0EC;
+  /* scheme-resolved roles */
+  --bg: var(--paper);
+  --fg: var(--ink);
+  --muted: var(--smoke);
+  --line: var(--bone);
+  --card: #FFFFFF;
+  --accent: var(--accent-l);
+  /* type */
+  --font-display: ui-rounded, "SF Pro Rounded", system-ui, -apple-system, sans-serif;
+  --font-text: system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
+  /* space + shape */
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px;
+  --sp-6: 32px; --sp-7: 48px; --sp-8: 72px; --sp-9: 112px;
+  --r-s: 10px; --r-m: 18px; --r-l: 26px;
+  --col: 680px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: var(--coal);
+    --fg: #F2F0EC;
+    --muted: #98938B;
+    --line: #2B2823;
+    --card: #1D1B18;
+    --accent: var(--accent-d);
+  }
+}
+
+/* elements carrying inline per-app accents re-resolve --accent locally */
+.themed { --accent: var(--accent-l); }
+@media (prefers-color-scheme: dark) {
+  .themed { --accent: var(--accent-d); }
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-text);
+  font-size: 17px;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+a { color: var(--fg); text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+a:hover { color: var(--accent); }
+img { display: block; max-width: 100%; }
+
+.wrap { max-width: var(--col); margin-inline: auto; padding-inline: var(--sp-5); }
+
+/* ---------- header ---------- */
+.top {
+  display: flex; align-items: center; gap: var(--sp-2);
+  padding-block: var(--sp-5) var(--sp-7);
+  font-family: var(--font-display);
+  font-weight: 600; font-size: 17px;
+}
+.top a { text-decoration: none; }
+.top .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+
+/* ---------- home ---------- */
+.site-line {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(34px, 9vw, 52px);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  margin: 0 0 var(--sp-7);
+  max-width: 12ch;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-9);
+}
+.card {
+  display: flex; flex-direction: column; gap: var(--sp-1);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-l);
+  padding: var(--sp-5) var(--sp-4) var(--sp-4);
+  text-decoration: none;
+}
+.card:hover { border-color: var(--accent); color: var(--fg); }
+.card .tile { margin-bottom: var(--sp-3); }
+.card-name { font-family: var(--font-display); font-weight: 700; font-size: 21px; }
+.card-tag { color: var(--muted); font-size: 15px; line-height: 1.35; }
+.card-price {
+  margin-top: var(--sp-2);
+  color: var(--accent);
+  font-family: var(--font-display); font-weight: 700; font-size: 15px;
+  font-variant-numeric: tabular-nums;
+}
+/* one app: a single wide card, icon beside text */
+.grid > .card:only-child {
+  grid-column: 1 / -1;
+  flex-direction: row; align-items: center; gap: var(--sp-4);
+  padding: var(--sp-4);
+}
+.grid > .card:only-child .tile { margin: 0; flex: none; }
+.grid > .card:only-child .card-body { display: flex; flex-direction: column; gap: var(--sp-1); }
+
+/* app-icon tile: gradient of the app's own accent + rounded wordmark */
+.tile {
+  width: 64px; height: 64px;
+  border-radius: 15px;
+  display: grid; place-items: center;
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--accent) 72%, #FFF) 0%,
+    color-mix(in srgb, var(--accent) 92%, #000) 100%);
+  color: #FFF;
+  font-family: var(--font-display); font-weight: 700; font-size: 17px;
+  letter-spacing: -0.01em;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / .35);
+}
+.tile-lg { width: 88px; height: 88px; border-radius: 21px; font-size: 23px; }
+.tile-sm { width: 44px; height: 44px; border-radius: 11px; font-size: 12px; }
+
+/* ---------- footer (shared) ---------- */
+.foot {
+  border-top: 1px solid var(--line);
+  padding-block: var(--sp-6) var(--sp-8);
+  display: flex; flex-wrap: wrap; gap: var(--sp-2) var(--sp-5);
+  color: var(--muted); font-size: 15px;
+}
+.foot a { color: var(--muted); }
+
+/* ---------- app page: hero ---------- */
+.hero { padding-bottom: var(--sp-7); }
+.hero-id { display: flex; align-items: center; gap: var(--sp-4); margin-bottom: var(--sp-5); }
+.hero-id h1 { font-family: var(--font-display); font-weight: 700; font-size: 29px; margin: 0; letter-spacing: -0.01em; }
+.pitch {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(30px, 8vw, 44px);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  margin: 0 0 var(--sp-3);
+  max-width: 14ch;
+}
+.sub { color: var(--muted); font-size: 17px; margin: 0 0 var(--sp-5); max-width: 34ch; }
+.badge { display: inline-block; }
+.badge img { height: 52px; width: auto; }
+.price-line {
+  margin: var(--sp-4) 0 0;
+  font-family: var(--font-display); font-weight: 600; font-size: 16px;
+  color: var(--fg);
+}
+.price-line strong { color: var(--accent); font-weight: 700; }
+
+/* ---------- screenshots: horizontal scroll ---------- */
+.shots {
+  display: flex; gap: var(--sp-4);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: var(--sp-2) max(var(--sp-5), calc((100vw - var(--col)) / 2 + var(--sp-5))) var(--sp-5);
+  margin-bottom: var(--sp-8);
+  scrollbar-width: none;
+}
+.shots::-webkit-scrollbar { display: none; }
+.shot {
+  flex: none;
+  scroll-snap-align: center;
+  width: min(62vw, 264px);
+  aspect-ratio: 1320 / 2868;
+  border-radius: var(--r-l);
+  border: 1px solid var(--line);
+  background:
+    repeating-linear-gradient(45deg, transparent 0 14px, color-mix(in srgb, var(--line) 55%, transparent) 14px 15px),
+    var(--card);
+  display: grid; place-content: center; gap: var(--sp-2);
+  text-align: center;
+  margin: 0;
+}
+.shot img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
+.shot figcaption { font-family: var(--font-mono); font-size: 12px; color: var(--muted); padding-inline: var(--sp-4); }
+
+/* ---------- feature blocks ---------- */
+.features { display: flex; flex-direction: column; gap: var(--sp-7); margin-bottom: var(--sp-9); }
+.feature { display: flex; flex-direction: column; gap: var(--sp-2); }
+.feature .num {
+  font-family: var(--font-mono); font-size: 13px; color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.feature h2 {
+  font-family: var(--font-display); font-weight: 700; font-size: 25px;
+  letter-spacing: -0.01em; margin: 0;
+}
+.feature p { margin: 0; color: var(--muted); max-width: 46ch; }
+
+/* ---------- the refusal ledger ---------- */
+.refuse { margin-bottom: var(--sp-9); }
+.refuse .kicker {
+  font-family: var(--font-mono); font-size: 13px; color: var(--muted);
+  margin: 0 0 var(--sp-4); text-transform: uppercase; letter-spacing: 0.08em;
+}
+.refuse ul {
+  list-style: none; margin: 0; padding: 0;
+  display: flex; flex-direction: column; gap: var(--sp-2);
+}
+.refuse .no {
+  position: relative; display: inline-block;
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(27px, 7.2vw, 40px);
+  line-height: 1.15; letter-spacing: -0.01em;
+  color: var(--muted);
+}
+.refuse .no::after {
+  content: "";
+  position: absolute; left: -2%; right: -2%; top: 54%;
+  height: 0.09em; min-height: 3px;
+  background: var(--accent);
+  border-radius: 99px;
+  transform: rotate(-1.2deg);
+  transform-origin: left center;
+}
+.refuse li:nth-child(2n) .no::after { transform: rotate(0.9deg); top: 50%; }
+.refuse li:nth-child(3n) .no::after { transform: rotate(-0.6deg); top: 57%; }
+.refuse .coda {
+  margin: var(--sp-5) 0 0;
+  font-family: var(--font-display); font-weight: 600; font-size: 19px;
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .refuse .no::after {
+      scale: 0 1;
+      animation: strike linear both;
+      animation-timeline: view();
+      animation-range: entry 45% entry 90%;
+    }
+    @keyframes strike { to { scale: 1 1; } }
+  }
+}
+
+/* ---------- fine print ---------- */
+.fine {
+  display: flex; flex-direction: column; gap: var(--sp-3);
+  color: var(--muted); font-size: 14px;
+  border-top: 1px solid var(--line);
+  padding-top: var(--sp-5);
+  margin-bottom: var(--sp-8);
+}
+.fine p { margin: 0; max-width: 52ch; }
+
+/* ---------- more apps strip ---------- */
+.more { margin-bottom: var(--sp-8); }
+.more h2 { font-family: var(--font-display); font-weight: 700; font-size: 19px; margin: 0 0 var(--sp-4); }
+.more-row { display: flex; gap: var(--sp-4); flex-wrap: wrap; }
+.more-row a { display: flex; flex-direction: column; align-items: center; gap: var(--sp-2); text-decoration: none; font-size: 13px; color: var(--muted); }
+.more[hidden] { display: none; }
+
+/* ---------- desktop is the adaptation ---------- */
+@media (min-width: 720px) {
+  :root { --col: 880px; }
+  body { font-size: 18px; }
+  .grid { grid-template-columns: repeat(auto-fill, minmax(196px, 1fr)); gap: var(--sp-5); }
+  .grid > .card:only-child { max-width: 480px; }
+  .hero { padding-top: var(--sp-6); }
+  .features { gap: var(--sp-8); }
+  .feature { display: grid; grid-template-columns: 64px 1fr; align-items: baseline; }
+  .feature .num { grid-row: span 2; }
+  .shot { width: 232px; }
+}

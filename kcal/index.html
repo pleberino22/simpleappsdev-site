@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kcal — one number, three macros, no noise</title>
+<meta name="description" content="Kcal is a radically simple calorie and macro tracker for iPhone. $0.99 one-time after a 7-day free trial.">
+<link rel="stylesheet" href="../css/site.css">
+</head>
+<body class="themed" data-app="kcal" style="--accent-l:#FF7A00;--accent-d:#FF8F2A">
+<div class="wrap">
+  <header class="top">
+    <a href="../">simpleappsdev</a><span class="dot"></span>
+  </header>
+
+  <section class="hero">
+    <div class="hero-id">
+      <span class="tile tile-lg" aria-hidden="true">Kcal</span>
+      <h1>Kcal</h1>
+    </div>
+    <p class="pitch">One number. Three macros. No noise.</p>
+    <p class="sub">Log what you eat. See your calories and macros. Nothing else.</p>
+    <a class="badge" href="https://apps.apple.com/app/id6786282885">
+      <img src="../assets/appstore-badge.svg" alt="Download on the App Store" height="52">
+    </a>
+    <p class="price-line" id="price-line"><strong>$0.99</strong> one-time, after a 7-day free trial. No subscription.</p>
+  </section>
+</div>
+
+<div class="shots" aria-label="Screenshots">
+  <figure class="shot"><figcaption>screenshot: Home — ring &amp; meals (light)</figcaption></figure>
+  <figure class="shot"><figcaption>screenshot: Home (dark)</figcaption></figure>
+  <figure class="shot"><figcaption>screenshot: Log sheet</figcaption></figure>
+  <figure class="shot"><figcaption>screenshot: Search</figcaption></figure>
+  <figure class="shot"><figcaption>screenshot: Calendar</figcaption></figure>
+</div>
+
+<div class="wrap">
+  <section class="features">
+    <article class="feature">
+      <span class="num">01</span>
+      <h2>One ring</h2>
+      <p>Your whole day on one screen: remaining calories in the center, protein, fat and carbs beneath, four fixed meals — Breakfast, Lunch, Dinner, Snack. Swipe back through any past day.</p>
+    </article>
+    <article class="feature">
+      <span class="num">02</span>
+      <h2>Five ways to log</h2>
+      <p>Scan a barcode, search a food database, snap a photo or describe your meal in words for an AI estimate (10 a day), or type it in yourself. Keep your own foods and recipes in a small library; recent foods are one tap away.</p>
+    </article>
+    <article class="feature">
+      <span class="num">03</span>
+      <h2>Streaks, not guilt</h2>
+      <p>A flame counts your consecutive logged days. The calendar marks days within budget. Forget a meal and Kcal nudges you once — one switch, no schedule to configure.</p>
+    </article>
+  </section>
+
+  <section class="refuse">
+    <p class="kicker">What Kcal refuses to do</p>
+    <ul>
+      <li><span class="no">No fasting timer.</span></li>
+      <li><span class="no">No recipe feed.</span></li>
+      <li><span class="no">No step counting.</span></li>
+      <li><span class="no">No water log.</span></li>
+      <li><span class="no">No social anything.</span></li>
+    </ul>
+    <p class="coda">Crossed off on purpose.</p>
+  </section>
+
+  <section class="fine">
+    <p>Kcal provides general estimates, not medical advice. Consult a professional for personal guidance.</p>
+    <p>Requires an iPhone running iOS 17 or later.</p>
+  </section>
+
+  <section class="more" id="more" hidden>
+    <h2>More apps</h2>
+    <div class="more-row" id="more-row"></div>
+  </section>
+
+  <footer class="foot" id="foot">
+    <a href="#">Privacy</a>
+  </footer>
+</div>
+<script>
+fetch('../apps.json').then(function(r){ return r.json(); }).then(function(data){
+  var me = document.body.dataset.app;
+  var app = data.apps.find(function(a){ return a.id === me; });
+  if (app) {
+    document.body.style.setProperty('--accent-l', app.accentLight);
+    document.body.style.setProperty('--accent-d', app.accentDark);
+    document.getElementById('price-line').innerHTML =
+      '<strong>' + app.price + '</strong>' + app.priceLine.slice(app.price.length);
+  }
+  var others = data.apps.filter(function(a){ return a.id !== me; });
+  if (others.length) {
+    var row = document.getElementById('more-row');
+    others.forEach(function(o){
+      var a = document.createElement('a');
+      a.className = 'themed';
+      a.href = '../' + o.url;
+      a.style.setProperty('--accent-l', o.accentLight);
+      a.style.setProperty('--accent-d', o.accentDark);
+      a.innerHTML = (o.icon
+        ? '<img class="tile tile-sm" src="../' + o.icon + '" alt="" width="44" height="44">'
+        : '<span class="tile tile-sm" aria-hidden="true">' + o.name + '</span>')
+        + '<span>' + o.name + '</span>';
+      row.appendChild(a);
+    });
+    document.getElementById('more').hidden = false;
+  }
+  document.getElementById('foot').insertAdjacentHTML('beforeend',
+    '<a href="mailto:' + data.supportEmail + '">Support</a>');
+});
+</script>
+</body>
+</html>
