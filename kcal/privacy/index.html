@@ -60,7 +60,9 @@
     <p>Delete the app and everything it stored goes with it. There is no backup on my side, no account to close and no deletion request to file. If you’d rather clear things one at a time, entries, foods and recipes can each be swiped away inside the app.</p>
 
     <h2>Questions</h2>
-    <p id="contact">Anything on this page you’d like clarified, ask — the <a href="../support/">support page</a> has the address.</p>
+    <!-- static mirror of supportEmail in apps.json; the script rewrites it from
+         the data on load, and omits the address entirely if it is unset -->
+    <p id="contact">Anything on this page you’d like clarified, ask: <a href="mailto:support@simpleappsdev.com">support@simpleappsdev.com</a>.</p>
 
     <p class="meta">Powered by FatSecret.<br>
     Last updated 11 August 2026.</p>
@@ -82,9 +84,12 @@
       return r.json();
     })
     .then(function (data) {
-      var mail = val(data.supportEmail);
-      if (!mail) return;
       var p = document.getElementById('contact');
+      var mail = val(data.supportEmail);
+      if (!mail) {
+        p.textContent = 'Anything on this page you’d like clarified, just ask.';
+        return;
+      }
       p.textContent = 'Anything on this page you’d like clarified, ask: ';
       var a = document.createElement('a');
       a.href = 'mailto:' + mail;

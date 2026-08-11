@@ -24,9 +24,29 @@
   </header>
   <main>
     <h1 class="site-line">Small apps that do one thing each.</h1>
-    <nav class="grid" id="grid" aria-label="Apps"></nav>
+    <nav class="grid" id="grid" aria-label="Apps">
+      <!-- STATIC MIRROR OF apps.json — keep the two in step when an app is
+           added, renamed, repriced or released. This is what a visitor with
+           no JavaScript, or with a failed fetch, gets; the script clears it
+           and renders the live list on load. The store link belongs to this
+           fallback only — the real card links to the app page, never the
+           store. A pending app gets no store link here at all. -->
+      <a class="card themed" href="kcal/" style="--accent-l:#FF7A00;--accent-d:#FF8F2A">
+        <span class="tile" aria-hidden="true">Kcal</span>
+        <span class="card-body">
+          <span class="card-name">Kcal</span>
+          <span class="card-tag">Calories and macros. Nothing else.</span>
+          <span class="card-price">$0.99</span>
+        </span>
+      </a>
+      <p class="notice">Kcal on the <a href="https://apps.apple.com/app/id6786282885">App Store</a>.</p>
+    </nav>
   </main>
-  <footer class="foot" id="foot"></footer>
+  <!-- static mirror of apps.json, same contract as the grid above -->
+  <footer class="foot" id="foot">
+    <a href="https://instagram.com/simpleappsdev">Instagram</a>
+    <a href="mailto:support@simpleappsdev.com">support@simpleappsdev.com</a>
+  </footer>
 </div>
 <script>
 (function () {
@@ -60,6 +80,7 @@
 
   function render(data) {
     var grid = document.getElementById('grid');
+    grid.textContent = '';  /* drops the static fallback, store link and all */
     (data.apps || []).forEach(function (app) {
       var a = document.createElement('a');
       a.className = 'card themed';
@@ -90,6 +111,7 @@
     });
 
     var foot = document.getElementById('foot');
+    foot.textContent = '';
     var ig = val(data.instagram);
     if (ig) {
       var i = document.createElement('a');
@@ -113,11 +135,9 @@
     })
     .then(render)
     .catch(function (err) {
+      /* the static fallback in #grid is untouched — the visitor keeps a card,
+         a tagline, a price and a way to the store */
       console.error('Could not load apps.json:', err);
-      var n = document.createElement('p');
-      n.className = 'notice';
-      n.textContent = 'The app list could not be loaded. Please reload the page.';
-      document.getElementById('grid').replaceWith(n);
     });
 })();
 </script>

@@ -27,7 +27,9 @@
     <h1>Support</h1>
     <p class="lede">Something not working, or a question the App Store listing doesn’t answer? Write to me. The answers people ask for most are below.</p>
 
-    <p id="contact">Support is by email.</p>
+    <!-- static mirror of supportEmail in apps.json; the script rewrites it from
+         the data on load and appends responseTime when it is set -->
+    <p id="contact">Email me at <a href="mailto:support@simpleappsdev.com">support@simpleappsdev.com</a>.</p>
 
     <h2>How do I restore my purchase?</h2>
     <p>Open Settings inside Kcal and tap <strong>Restore purchase</strong>. As long as you’re signed in with the Apple ID you bought it with, the unlock comes back — on a new phone too. Nothing is tied to the old device.</p>
@@ -68,6 +70,7 @@
     .then(function (data) {
       var mail = val(data.supportEmail);
       var contact = document.getElementById('contact');
+      contact.textContent = 'Support is by email.';
       if (mail) {
         contact.textContent = 'Email me at ';
         var a = document.createElement('a');

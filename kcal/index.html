@@ -30,9 +30,17 @@
     </div>
     <p class="pitch">One number. Three macros. No noise.</p>
     <p class="sub">Log what you eat. See your calories and macros. Nothing else.</p>
-    <!-- filled from apps.json: the store badge when the app is on sale,
-         a "Coming soon" element of the same height when it isn't -->
-    <div class="cta" id="cta"></div>
+    <!-- STATIC MIRROR OF apps.json — keep the two in step.
+         This is what a visitor with no JavaScript, or with a failed fetch,
+         gets; the script replaces it from the data on load. When apps.json
+         carries no appStoreUrl, or the app is pending, this must be the
+         "Coming soon" span instead — never a badge with a dead href:
+         <span class="soon">Coming soon</span> -->
+    <div class="cta" id="cta">
+      <a class="badge" href="https://apps.apple.com/app/id6786282885">
+        <img src="../assets/appstore-badge.svg" alt="Download on the App Store" width="176" height="52">
+      </a>
+    </div>
     <p class="price-line" id="price-line"><strong>$0.99</strong> one-time, after a 7-day free trial. No subscription.</p>
   </section>
 </div>
@@ -146,6 +154,7 @@
   function renderCta(app) {
     var slot = document.getElementById('cta');
     var url = val(app.appStoreUrl);
+    slot.textContent = '';
     if (app.status === 'live' && url) {
       var a = document.createElement('a');
       a.className = 'badge';
@@ -220,13 +229,9 @@
     })
     .then(render)
     .catch(function (err) {
-      /* the pitch, price, features and links are in the HTML already, so the
-         page stays readable; only the store slot has nothing to show */
+      /* nothing to do: the static hero, badge, price, features and links are
+         all still standing. log it and leave the page alone. */
       console.error('Could not load apps.json:', err);
-      var n = document.createElement('p');
-      n.className = 'notice';
-      n.textContent = 'The App Store link could not be loaded. Please reload the page.';
-      document.getElementById('cta').appendChild(n);
     });
 })();
 </script>

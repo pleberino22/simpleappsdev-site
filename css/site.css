@@ -107,14 +107,16 @@ img { display: block; max-width: 100%; }
   font-family: var(--font-display); font-weight: 700; font-size: 15px;
   font-variant-numeric: tabular-nums;
 }
-/* one app: a single wide card, icon beside text */
-.grid > .card:only-child {
+/* the static fallback's store line sits under the cards, full width */
+.grid > .notice { grid-column: 1 / -1; }
+/* one app: a single wide card, icon beside text.
+   :only-of-type, not :only-child — the fallback line is a sibling */
+.grid > .card:only-of-type {
   grid-column: 1 / -1;
   flex-direction: row; align-items: center; gap: var(--sp-4);
   padding: var(--sp-4);
 }
-.grid > .card:only-child .tile { margin: 0; flex: none; }
-.grid > .card:only-child .card-body { display: flex; flex-direction: column; gap: var(--sp-1); }
+.grid > .card:only-of-type .tile { margin: 0; flex: none; }
 
 /* app-icon tile: gradient of the app's own accent + rounded wordmark */
 .tile {
@@ -312,7 +314,7 @@ img { display: block; max-width: 100%; }
   :root { --col: 880px; }
   body { font-size: 18px; }
   .grid { grid-template-columns: repeat(auto-fill, minmax(196px, 1fr)); gap: var(--sp-5); }
-  .grid > .card:only-child { max-width: 480px; }
+  .grid > .card:only-of-type { max-width: 480px; }
   .hero { padding-top: var(--sp-6); }
   .features { gap: var(--sp-8); }
   .feature { display: grid; grid-template-columns: 64px 1fr; align-items: baseline; }
