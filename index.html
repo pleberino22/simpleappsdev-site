@@ -3,13 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
 <title>simpleappsdev — small apps that do one thing each</title>
 <meta name="description" content="A portfolio of small, paid iPhone apps. Each one does a single thing.">
+<link rel="canonical" href="https://simpleappsdev.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="simpleappsdev — small apps that do one thing each">
+<meta property="og:description" content="A portfolio of small, paid iPhone apps. Each one does a single thing.">
+<meta property="og:url" content="https://simpleappsdev.com/">
+<meta property="og:image" content="https://simpleappsdev.com/assets/og/home.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="css/site.css">
 </head>
 <body>
 <div class="wrap">
-  <header class="top themed" style="--accent-l:#FF7A00;--accent-d:#FF8F2A">
+  <header class="top">
     <a href="./">simpleappsdev</a><span class="dot"></span>
   </header>
   <main>
@@ -19,29 +29,97 @@
   <footer class="foot" id="foot"></footer>
 </div>
 <script>
-fetch('apps.json').then(function(r){ return r.json(); }).then(function(data){
-  var grid = document.getElementById('grid');
-  data.apps.forEach(function(app){
-    var a = document.createElement('a');
-    a.className = 'card themed';
-    a.href = app.url;
-    a.style.setProperty('--accent-l', app.accentLight);
-    a.style.setProperty('--accent-d', app.accentDark);
-    var tile = app.icon
-      ? '<img class="tile" src="' + app.icon + '" alt="" width="64" height="64">'
-      : '<span class="tile" aria-hidden="true">' + app.name + '</span>';
-    a.innerHTML = tile +
-      '<span class="card-body">' +
-        '<span class="card-name">' + app.name + '</span>' +
-        '<span class="card-tag">' + app.tagline + '</span>' +
-        '<span class="card-price">' + app.price + '</span>' +
-      '</span>';
-    grid.appendChild(a);
-  });
-  document.getElementById('foot').innerHTML =
-    '<a href="' + data.instagram + '">Instagram</a>' +
-    '<a href="mailto:' + data.supportEmail + '">' + data.supportEmail + '</a>';
-});
+(function () {
+  /* a value the owner hasn't filled in yet is marked, never empty — treat it as absent */
+  function val(v) {
+    return (typeof v === 'string' && v !== '' && v.slice(0, 5) !== 'TODO:') ? v : null;
+  }
+  function wordmark(app, cls) {
+    var s = document.createElement('span');
+    s.className = cls;
+    s.setAttribute('aria-hidden', 'true');
+    s.textContent = app.name;
+    return s;
+  }
+  /* icon if the owner uploaded one, the gradient wordmark otherwise —
+     both are finished states, and a 404 falls back to the wordmark too */
+  function tile(app, cls, px, prefix) {
+    var src = val(app.icon);
+    if (!src) return wordmark(app, cls);
+    var img = document.createElement('img');
+    img.className = cls;
+    img.src = prefix + src;
+    img.alt = '';
+    img.width = px;
+    img.height = px;
+    img.addEventListener('error', function () {
+      img.replaceWith(wordmark(app, cls));
+    });
+    return img;
+  }
+
+  function render(data) {
+    var grid = document.getElementById('grid');
+    (data.apps || []).forEach(function (app) {
+      var a = document.createElement('a');
+      a.className = 'card themed';
+      a.href = app.url;
+      a.style.setProperty('--accent-l', app.accentLight);
+      a.style.setProperty('--accent-d', app.accentDark);
+
+      var body = document.createElement('span');
+      body.className = 'card-body';
+      var name = document.createElement('span');
+      name.className = 'card-name';
+      name.textContent = app.name;
+      var tag = document.createElement('span');
+      tag.className = 'card-tag';
+      tag.textContent = app.tagline;
+      body.append(name, tag);
+
+      var price = val(app.price);
+      if (price) {
+        var p = document.createElement('span');
+        p.className = 'card-price';
+        p.textContent = price;
+        body.appendChild(p);
+      }
+
+      a.append(tile(app, 'tile', 64, ''), body);
+      grid.appendChild(a);
+    });
+
+    var foot = document.getElementById('foot');
+    var ig = val(data.instagram);
+    if (ig) {
+      var i = document.createElement('a');
+      i.href = ig;
+      i.textContent = 'Instagram';
+      foot.appendChild(i);
+    }
+    var mail = val(data.supportEmail);
+    if (mail) {
+      var m = document.createElement('a');
+      m.href = 'mailto:' + mail;
+      m.textContent = mail;
+      foot.appendChild(m);
+    }
+  }
+
+  fetch('apps.json')
+    .then(function (r) {
+      if (!r.ok) throw new Error('apps.json ' + r.status);
+      return r.json();
+    })
+    .then(render)
+    .catch(function (err) {
+      console.error('Could not load apps.json:', err);
+      var n = document.createElement('p');
+      n.className = 'notice';
+      n.textContent = 'The app list could not be loaded. Please reload the page.';
+      document.getElementById('grid').replaceWith(n);
+    });
+})();
 </script>
 </body>
 </html>

@@ -3,18 +3,24 @@
   "line": "Small apps that do one thing each.",
   "instagram": "https://instagram.com/simpleappsdev",
   "supportEmail": "support@simpleappsdev.app",
+  "responseTime": "TODO:responseTime",
   "apps": [
     {
       "id": "kcal",
       "name": "Kcal",
       "tagline": "Calories and macros. Nothing else.",
       "price": "$0.99",
-      "priceLine": "$0.99 one-time, after a 7-day free trial. No subscription.",
+      "priceRest": " one-time, after a 7-day free trial. No subscription.",
       "accentLight": "#FF7A00",
       "accentDark": "#FF8F2A",
       "url": "kcal/",
       "appStoreUrl": "https://apps.apple.com/app/id6786282885",
-      "status": "live"
+      "requires": "Requires an iPhone running iOS 17 or later.",
+      "theme": "auto",
+      "schemes": ["light", "dark"],
+      "shots": 4,
+      "status": "live",
+      "icon": "TODO:icon"
     }
   ]
 }

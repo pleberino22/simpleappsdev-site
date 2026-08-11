@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Kcal — Privacy</title>
+<meta name="description" content="What Kcal stores, what leaves your iPhone, and what it never collects.">
+<link rel="canonical" href="https://simpleappsdev.com/kcal/privacy/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Kcal — Privacy">
+<meta property="og:description" content="What Kcal stores, what leaves your iPhone, and what it never collects.">
+<meta property="og:url" content="https://simpleappsdev.com/kcal/privacy/">
+<meta property="og:image" content="https://simpleappsdev.com/assets/og/kcal.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../../css/site.css">
+</head>
+<body class="themed" data-app="kcal" style="--accent-l:#FF7A00;--accent-d:#FF8F2A">
+<div class="wrap">
+  <header class="top">
+    <a href="../../">simpleappsdev</a><span class="dot"></span>
+  </header>
+
+  <main class="doc">
+    <h1>Privacy</h1>
+    <p class="lede">Kcal is a food diary that lives on your phone. This page says exactly what that means.</p>
+
+    <h2>Your log stays on your iPhone</h2>
+    <p>Everything you enter — foods, meals, goals, your library and recipes, your streak — is stored in Kcal’s own database on the device. It is not copied to a server, and there is no server to copy it to. Nobody else can read it, including me.</p>
+
+    <h2>There is no account</h2>
+    <p>Kcal has no sign-up, no login, no email field and no profile. It never asks who you are, and it collects no name, age, height or weight. Nothing you log can be traced back to you, because there is nothing to trace it to.</p>
+
+    <h2>What leaves your phone, and when</h2>
+    <p>Four features look something up online. Each one sends only what it needs, and only at the moment you use it:</p>
+    <ul>
+      <li><strong>Scanning a barcode</strong> sends the barcode number to the Open Food Facts database. If the product isn’t there, the number is then sent to FatSecret. Nothing else goes with it.</li>
+      <li><strong>Searching for a food</strong> sends the words you type to USDA FoodData Central and to FatSecret, which return matching foods and their nutrition values.</li>
+      <li><strong>Estimating a meal from a photo</strong> resizes the photo and sends it to Groq, which returns an estimate you can edit before saving. The photo is sent for that estimate and for nothing else.</li>
+      <li><strong>Describing a meal in words</strong> sends the description you type to Groq, which returns the same kind of estimate.</li>
+    </ul>
+    <p>These requests carry no name, no email address and no identifier for you or your phone, and they never include your food log, your goals or your history. What comes back is saved on the device like anything else you enter.</p>
+    <p>Everything else in Kcal — logging, editing, the ring, the calendar, streaks, your library and recipes, reminders — works with no network connection at all.</p>
+
+    <h2>Camera and photos</h2>
+    <p>Kcal asks for camera access for two things: scanning a barcode, and taking a photo of a meal for an estimate. You can also pick an existing photo from your library instead. The app doesn’t save photos, doesn’t build an album, and has no access to your photo library beyond the single picture you choose. If you decline camera access, every other way of logging still works.</p>
+
+    <h2>Notifications</h2>
+    <p>Meal reminders are optional and off unless you turn them on, either during setup or later in Settings. They are scheduled by your iPhone, on your iPhone — no reminder is sent from anywhere else, and none of them report back. Turning the switch off cancels them.</p>
+
+    <h2>Purchases</h2>
+    <p>The 7-day trial and the one-time unlock are handled entirely by Apple’s In-App Purchase system. Payment happens in Apple’s sheet, not in Kcal, and I never see your card, your billing details or your Apple ID. Kcal only learns whether the unlock has been purchased.</p>
+
+    <h2>No analytics, no tracking, no ads</h2>
+    <p>Kcal contains no analytics, no advertising and no tracking of any kind. It never asks to track you across other apps, because it has nothing to track you with.</p>
+
+    <h2>Deleting your data</h2>
+    <p>Delete the app and everything it stored goes with it. There is no backup on my side, no account to close and no deletion request to file. If you’d rather clear things one at a time, entries, foods and recipes can each be swiped away inside the app.</p>
+
+    <h2>Questions</h2>
+    <p id="contact">Anything on this page you’d like clarified, ask — the <a href="../support/">support page</a> has the address.</p>
+
+    <p class="meta">Powered by FatSecret.<br>
+    Last updated 11 August 2026.</p>
+  </main>
+
+  <footer class="foot" id="foot">
+    <a href="../">Kcal</a>
+    <a href="../support/">Support</a>
+  </footer>
+</div>
+<script>
+(function () {
+  function val(v) {
+    return (typeof v === 'string' && v !== '' && v.slice(0, 5) !== 'TODO:') ? v : null;
+  }
+  fetch('../../apps.json')
+    .then(function (r) {
+      if (!r.ok) throw new Error('apps.json ' + r.status);
+      return r.json();
+    })
+    .then(function (data) {
+      var mail = val(data.supportEmail);
+      if (!mail) return;
+      var p = document.getElementById('contact');
+      p.textContent = 'Anything on this page you’d like clarified, ask: ';
+      var a = document.createElement('a');
+      a.href = 'mailto:' + mail;
+      a.textContent = mail;
+      p.appendChild(a);
+      p.appendChild(document.createTextNode('.'));
+    })
+    .catch(function (err) {
+      /* the page is static prose; only the address is data, and the support
+         page link in it still works */
+      console.error('Could not load apps.json:', err);
+    });
+})();
+</script>
+</body>
+</html>

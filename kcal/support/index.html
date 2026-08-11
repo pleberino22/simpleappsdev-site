@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Kcal — Support</title>
+<meta name="description" content="Help with Kcal: restoring a purchase, the free trial, barcode scanning, AI estimates and deleting your data.">
+<link rel="canonical" href="https://simpleappsdev.com/kcal/support/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Kcal — Support">
+<meta property="og:description" content="Help with Kcal: restoring a purchase, the free trial, barcode scanning, AI estimates and deleting your data.">
+<meta property="og:url" content="https://simpleappsdev.com/kcal/support/">
+<meta property="og:image" content="https://simpleappsdev.com/assets/og/kcal.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../../css/site.css">
+</head>
+<body class="themed" data-app="kcal" style="--accent-l:#FF7A00;--accent-d:#FF8F2A">
+<div class="wrap">
+  <header class="top">
+    <a href="../../">simpleappsdev</a><span class="dot"></span>
+  </header>
+
+  <main class="doc">
+    <h1>Support</h1>
+    <p class="lede">Something not working, or a question the App Store listing doesn’t answer? Write to me. The answers people ask for most are below.</p>
+
+    <p id="contact">Support is by email.</p>
+
+    <h2>How do I restore my purchase?</h2>
+    <p>Open Settings inside Kcal and tap <strong>Restore purchase</strong>. As long as you’re signed in with the Apple ID you bought it with, the unlock comes back — on a new phone too. Nothing is tied to the old device.</p>
+
+    <h2>What does the free trial include, and when does it end?</h2>
+    <p>The whole app, for 7 days from the day you install it. Nothing is held back during the trial. After that a one-time $0.99 unlock keeps it going. There is no subscription, no renewal and nothing to cancel.</p>
+
+    <h2>The scanner can’t find my product</h2>
+    <p>Scanning uses the camera, so it needs camera access — if you declined it, iOS Settings › Kcal will let you switch it back on. Kcal then checks two food databases for the code, and some products simply aren’t in either one. When that happens, search for the food by name instead, or enter it manually once and save it to your library — after that it’s two taps forever.</p>
+
+    <h2>Why do I only get ten AI estimates a day?</h2>
+    <p>Photo estimates and written descriptions share one daily limit of ten, and only estimates that actually come back count against it — a failed attempt doesn’t cost you one. The counter resets at midnight, and the limit is the same during the trial as it is after you’ve bought the app.</p>
+
+    <h2>How do I delete my data?</h2>
+    <p>Delete the app. Everything Kcal stored is on your phone and goes with it — there’s no account and no copy anywhere else. To clear things individually, swipe to delete entries in a meal, or foods and recipes in your library.</p>
+
+    <h2>Do I need an account?</h2>
+    <p>No. Kcal has no sign-up and never asks for an email address. See the <a href="../privacy/">privacy page</a> for what that means in detail.</p>
+
+    <p class="meta"><a href="../">Back to Kcal</a></p>
+  </main>
+
+  <footer class="foot" id="foot">
+    <a href="../">Kcal</a>
+    <a href="../privacy/">Privacy</a>
+  </footer>
+</div>
+<script>
+(function () {
+  function val(v) {
+    return (typeof v === 'string' && v !== '' && v.slice(0, 5) !== 'TODO:') ? v : null;
+  }
+  fetch('../../apps.json')
+    .then(function (r) {
+      if (!r.ok) throw new Error('apps.json ' + r.status);
+      return r.json();
+    })
+    .then(function (data) {
+      var mail = val(data.supportEmail);
+      var contact = document.getElementById('contact');
+      if (mail) {
+        contact.textContent = 'Email me at ';
+        var a = document.createElement('a');
+        a.href = 'mailto:' + mail;
+        a.textContent = mail;
+        contact.appendChild(a);
+        contact.appendChild(document.createTextNode('.'));
+      }
+      /* the reply window is the owner's promise to make — say nothing until it's set */
+      var response = val(data.responseTime);
+      if (response) {
+        contact.appendChild(document.createTextNode(' ' + response));
+      }
+    })
+    .catch(function (err) {
+      /* every answer on this page is static and still readable */
+      console.error('Could not load apps.json:', err);
+    });
+})();
+</script>
+</body>
+</html>
