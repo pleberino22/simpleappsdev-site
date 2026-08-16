@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Dose — Privacy</title>
+<meta name="description" content="What Dose stores, what it never collects, and why nothing leaves your iPhone.">
+<link rel="canonical" href="https://simpleappsdev.com/dose/privacy/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Dose — Privacy">
+<meta property="og:description" content="What Dose stores, what it never collects, and why nothing leaves your iPhone.">
+<meta property="og:url" content="https://simpleappsdev.com/dose/privacy/">
+<meta property="og:image" content="https://simpleappsdev.com/assets/og/dose.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../../css/site.css">
+<style>
+  /* Dose enforces dark at the window level and has no appearance setting, so
+     its pages show what the product is regardless of the visitor's system
+     setting. Same values as the shared dark scheme in css/site.css — no new
+     tokens, no new styles, nothing that can reach another app's pages. */
+  body[data-theme="dark"] {
+    --bg: var(--coal);
+    --fg: #F2F0EC;
+    --muted: #98938B;
+    --line: #2B2823;
+    --card: #1D1B18;
+    --accent: var(--accent-d);
+  }
+  body[data-theme="dark"] .themed { --accent: var(--accent-d); }
+</style>
+</head>
+<body class="themed" data-app="dose" data-theme="dark" style="--accent-l:#34D399;--accent-d:#3FE3A9">
+<div class="wrap">
+  <header class="top">
+    <a href="../../">simpleappsdev</a><span class="dot"></span>
+  </header>
+
+  <main class="doc">
+    <h1>Privacy</h1>
+    <p class="lede">What you take is nobody else’s business. Dose is built so that it can’t become anyone’s.</p>
+
+    <h2>Nothing leaves your iPhone</h2>
+    <p>Dose makes no network requests. Not for sync, not for backup, not for analytics, not for anything — the app has no server to talk to and no account to talk about. The only connection involved anywhere is Apple’s own, when you buy the unlock.</p>
+    <p>That means your stacks, your schedule, what you take and when you took it never travel. They sit in Dose’s own database on the device and stay there.</p>
+
+    <h2>There is no account</h2>
+    <p>No sign-up, no login, no email address, no profile. Dose never asks who you are, and nothing it stores could be tied back to you if it did leave — which it doesn’t.</p>
+
+    <h2>What Dose keeps, and for how long</h2>
+    <p>Your stacks and inventory stay until you change or delete them. The record of doses you’ve taken is kept for 60 days and then removed automatically — Dose only needs recent history to show you today, so it doesn’t hoard the rest.</p>
+
+    <h2>Notifications are the only permission</h2>
+    <p>Dose asks for one thing: permission to send notifications, and only at the moment it first needs them. It uses them for two purposes — reminding you a stack is due, and telling you an item is running low. Both are scheduled by your iPhone, on your iPhone; nothing is sent from anywhere else and none of them report back.</p>
+    <p>A single switch in Settings turns every reminder off and removes the pending ones. Dose asks for no camera, no photos, no contacts, no location and no health data.</p>
+
+    <h2>Purchases</h2>
+    <p>The 7-day trial and the one-time unlock are handled entirely by Apple’s In-App Purchase system. Payment happens in Apple’s sheet, not in Dose, and I never see your card, your billing details or your Apple ID. Dose only learns whether the unlock has been purchased.</p>
+
+    <h2>No analytics, no tracking, no ads</h2>
+    <p>There is no analytics package, no advertising and no tracking of any kind, and no third-party code in the app at all. Dose never asks to track you across other apps, because it has nothing to track you with.</p>
+
+    <h2>Deleting your data</h2>
+    <p>Delete the app and everything it stored goes with it. There is no backup on my side, no account to close and no deletion request to file. Inside the app, stacks and inventory items can each be deleted individually.</p>
+
+    <h2>Questions</h2>
+    <!-- static mirror of supportEmail in apps.json; the script rewrites it from
+         the data on load, and omits the address entirely if it is unset -->
+    <p id="contact">Anything on this page you’d like clarified, ask: <a href="mailto:support@simpleappsdev.com">support@simpleappsdev.com</a>.</p>
+
+    <p class="meta">Last updated 16 August 2026.</p>
+  </main>
+
+  <footer class="foot" id="foot">
+    <a href="../">Dose</a>
+    <a href="../support/">Support</a>
+  </footer>
+</div>
+<script>
+(function () {
+  function val(v) {
+    return (typeof v === 'string' && v !== '' && v.slice(0, 5) !== 'TODO:') ? v : null;
+  }
+  fetch('../../apps.json')
+    .then(function (r) {
+      if (!r.ok) throw new Error('apps.json ' + r.status);
+      return r.json();
+    })
+    .then(function (data) {
+      var p = document.getElementById('contact');
+      var mail = val(data.supportEmail);
+      if (!mail) {
+        p.textContent = 'Anything on this page you’d like clarified, just ask.';
+        return;
+      }
+      p.textContent = 'Anything on this page you’d like clarified, ask: ';
+      var a = document.createElement('a');
+      a.href = 'mailto:' + mail;
+      a.textContent = mail;
+      p.appendChild(a);
+      p.appendChild(document.createTextNode('.'));
+    })
+    .catch(function (err) {
+      /* the page is static prose; only the address is data */
+      console.error('Could not load apps.json:', err);
+    });
+})();
+</script>
+</body>
+</html>

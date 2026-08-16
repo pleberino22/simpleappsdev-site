@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Dose — one reminder, not one per pill</title>
+<meta name="description" content="Dose is a supplement and medication reminder for iPhone built around stacks. $0.99 one-time after a 7-day free trial.">
+<link rel="canonical" href="https://simpleappsdev.com/dose/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Dose — one reminder, not one per pill">
+<meta property="og:description" content="A supplement and medication reminder for iPhone built around stacks. $0.99 one-time after a 7-day free trial.">
+<meta property="og:url" content="https://simpleappsdev.com/dose/">
+<meta property="og:image" content="https://simpleappsdev.com/assets/og/dose.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../css/site.css">
+<style>
+  /* Dose enforces dark at the window level and has no appearance setting, so
+     its pages show what the product is regardless of the visitor's system
+     setting. Same values as the shared dark scheme in css/site.css — no new
+     tokens, no new styles, nothing that can reach another app's pages. */
+  body[data-theme="dark"] {
+    --bg: var(--coal);
+    --fg: #F2F0EC;
+    --muted: #98938B;
+    --line: #2B2823;
+    --card: #1D1B18;
+    --accent: var(--accent-d);
+  }
+  body[data-theme="dark"] .themed { --accent: var(--accent-d); }
+</style>
+</head>
+<body class="themed" data-app="dose" data-theme="dark" style="--accent-l:#34D399;--accent-d:#3FE3A9">
+<div class="wrap">
+  <header class="top">
+    <a href="../">simpleappsdev</a><span class="dot"></span>
+  </header>
+
+  <section class="hero">
+    <div class="hero-id">
+      <span class="tile tile-lg" id="hero-tile" aria-hidden="true">Dose</span>
+      <h1>Dose</h1>
+    </div>
+    <p class="pitch">One reminder. Not one per pill.</p>
+    <p class="sub">Group what you take, take it in one tap, and know when to reorder.</p>
+    <!-- STATIC MIRROR OF apps.json — keep the two in step.
+         Dose is pending, so this is the "Coming soon" element and must stay
+         that way until the app is actually on sale, at which point status
+         flips to live and appStoreUrl arrives in apps.json in the same edit.
+         Never a badge with a dead href. -->
+    <div class="cta" id="cta">
+      <span class="soon">Coming soon</span>
+    </div>
+    <p class="price-line" id="price-line"><strong>$0.99</strong> one-time, after a 7-day free trial. No subscription.</p>
+  </section>
+</div>
+
+<!-- four slots, one per screen. Dose is dark-only — there is no light capture
+     set and the rail must not look for one, so these are plain <img> with no
+     scheme swap. Captures are the 1320×2868 originals scaled to 600 wide. -->
+<div class="shots" aria-label="Screenshots">
+  <figure class="shot">
+    <img src="../assets/shots/dose/dark-1.webp" alt="" width="600" height="1304" loading="lazy" decoding="async" onerror="this.remove()">
+  </figure>
+  <figure class="shot">
+    <img src="../assets/shots/dose/dark-2.webp" alt="" width="600" height="1304" loading="lazy" decoding="async" onerror="this.remove()">
+  </figure>
+  <figure class="shot">
+    <img src="../assets/shots/dose/dark-3.webp" alt="" width="600" height="1304" loading="lazy" decoding="async" onerror="this.remove()">
+  </figure>
+  <figure class="shot">
+    <img src="../assets/shots/dose/dark-4.webp" alt="" width="600" height="1304" loading="lazy" decoding="async" onerror="this.remove()">
+  </figure>
+</div>
+
+<div class="wrap">
+  <section class="features">
+    <article class="feature">
+      <span class="num">01</span>
+      <h2>Stacks, not pills</h2>
+      <p>Group what you take into named stacks — Morning, Post-workout, Night — and give each one its times and days. One reminder for the whole group, however many things are in it.</p>
+    </article>
+    <article class="feature">
+      <span class="num">02</span>
+      <h2>Take it, or don't</h2>
+      <p>Take the whole stack at once, or check off item by item and leave the rest. Skip what you didn't take. Tapped the wrong thing? Open it again and undo it — your stock comes back with it.</p>
+    </article>
+    <article class="feature">
+      <span class="num">03</span>
+      <h2>Never run out</h2>
+      <p>Every dose you take comes off your count, so each item shows about how many days are left and tells you while there's still time to reorder. Anything you'd rather not count, leave untracked.</p>
+    </article>
+  </section>
+
+  <section class="refuse">
+    <p class="kicker">What Dose refuses to do</p>
+    <ul>
+      <li><span class="no">No adherence score.</span></li>
+      <li><span class="no">No streaks.</span></li>
+      <li><span class="no">No history to scroll.</span></li>
+      <li><span class="no">No account.</span></li>
+      <li><span class="no">No ads, no tracking.</span></li>
+    </ul>
+    <p class="coda">Crossed off on purpose.</p>
+  </section>
+
+  <section class="fine">
+    <!-- TODO:disclaimer — the app's About section carries a not-medical-advice
+         disclaimer, but dose-status.md names it without quoting it. It belongs
+         here verbatim, above the requires line, exactly as the app words it. -->
+    <p id="requires">Requires an iPhone running iOS 17 or later.</p>
+  </section>
+
+  <section class="more" id="more" hidden>
+    <h2>More apps</h2>
+    <div class="more-row" id="more-row"></div>
+  </section>
+
+  <footer class="foot" id="foot">
+    <a href="privacy/">Privacy</a>
+    <a href="support/">Support</a>
+  </footer>
+</div>
+<script>
+(function () {
+  /* a value the owner hasn't filled in yet is marked, never empty — treat it as absent */
+  function val(v) {
+    return (typeof v === 'string' && v !== '' && v.slice(0, 5) !== 'TODO:') ? v : null;
+  }
+  function wordmark(app, cls) {
+    var s = document.createElement('span');
+    s.className = cls;
+    s.setAttribute('aria-hidden', 'true');
+    s.textContent = app.name;
+    return s;
+  }
+  function tile(app, cls, px, prefix) {
+    var src = val(app.icon);
+    if (!src) return wordmark(app, cls);
+    var img = document.createElement('img');
+    img.className = cls;
+    img.src = prefix + src;
+    img.alt = '';
+    img.width = px;
+    img.height = px;
+    img.addEventListener('error', function () {
+      img.replaceWith(wordmark(app, cls));
+    });
+    return img;
+  }
+
+  /* the store link is data, never markup: no appStoreUrl (or a pending app)
+     means "Coming soon", never a dead badge */
+  function renderCta(app) {
+    var slot = document.getElementById('cta');
+    var url = val(app.appStoreUrl);
+    slot.textContent = '';
+    if (app.status === 'live' && url) {
+      var a = document.createElement('a');
+      a.className = 'badge';
+      a.href = url;
+      var img = document.createElement('img');
+      img.src = '../assets/appstore-badge.svg';
+      img.alt = 'Download on the App Store';
+      img.width = 176;
+      img.height = 52;
+      a.appendChild(img);
+      slot.appendChild(a);
+    } else {
+      var s = document.createElement('span');
+      s.className = 'soon';
+      s.textContent = 'Coming soon';
+      slot.appendChild(s);
+    }
+  }
+
+  function render(data) {
+    var me = document.body.dataset.app;
+    var app = (data.apps || []).find(function (a) { return a.id === me; });
+
+    if (app) {
+      document.body.style.setProperty('--accent-l', app.accentLight);
+      document.body.style.setProperty('--accent-d', app.accentDark);
+
+      var icon = tile(app, 'tile tile-lg', 88, '../');
+      document.getElementById('hero-tile').replaceWith(icon);
+
+      renderCta(app);
+
+      /* two fields, concatenated — the accent part and the plain part.
+         never one string sliced by the length of the other */
+      var price = val(app.price);
+      var rest = val(app.priceRest);
+      if (price) {
+        var line = document.getElementById('price-line');
+        line.textContent = '';
+        var strong = document.createElement('strong');
+        strong.textContent = price;
+        line.appendChild(strong);
+        if (rest) line.appendChild(document.createTextNode(rest));
+      }
+
+      var requires = val(app.requires);
+      if (requires) document.getElementById('requires').textContent = requires;
+    }
+
+    var others = (data.apps || []).filter(function (a) { return a.id !== me; });
+    if (others.length) {
+      var row = document.getElementById('more-row');
+      others.forEach(function (o) {
+        var a = document.createElement('a');
+        a.className = 'themed';
+        a.href = '../' + o.url;
+        a.style.setProperty('--accent-l', o.accentLight);
+        a.style.setProperty('--accent-d', o.accentDark);
+        var name = document.createElement('span');
+        name.textContent = o.name;
+        a.append(tile(o, 'tile tile-sm', 44, '../'), name);
+        row.appendChild(a);
+      });
+      document.getElementById('more').hidden = false;
+    }
+  }
+
+  fetch('../apps.json')
+    .then(function (r) {
+      if (!r.ok) throw new Error('apps.json ' + r.status);
+      return r.json();
+    })
+    .then(render)
+    .catch(function (err) {
+      /* nothing to do: the static hero, price, features and links are all
+         still standing. log it and leave the page alone. */
+      console.error('Could not load apps.json:', err);
+    });
+})();
+</script>
+</body>
+</html>

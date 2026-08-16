@@ -21,6 +21,22 @@
       "shots": 5,
       "status": "live",
       "icon": "assets/icons/kcal.png"
+    },
+    {
+      "id": "dose",
+      "name": "Dose",
+      "tagline": "Never miss a dose. Never run out.",
+      "price": "$0.99",
+      "priceRest": " one-time, after a 7-day free trial. No subscription.",
+      "accentLight": "#34D399",
+      "accentDark": "#3FE3A9",
+      "url": "dose/",
+      "requires": "Requires an iPhone running iOS 17 or later.",
+      "theme": "dark",
+      "schemes": ["dark"],
+      "shots": 4,
+      "status": "pending",
+      "icon": "TODO:icon"
     }
   ]
 }

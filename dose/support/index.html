@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Dose — Support</title>
+<meta name="description" content="Help with Dose: restoring a purchase, the free trial, reminders, partial doses and how the days-left estimate works.">
+<link rel="canonical" href="https://simpleappsdev.com/dose/support/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Dose — Support">
+<meta property="og:description" content="Help with Dose: restoring a purchase, the free trial, reminders, partial doses and how the days-left estimate works.">
+<meta property="og:url" content="https://simpleappsdev.com/dose/support/">
+<meta property="og:image" content="https://simpleappsdev.com/assets/og/dose.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../../css/site.css">
+<style>
+  /* Dose enforces dark at the window level and has no appearance setting, so
+     its pages show what the product is regardless of the visitor's system
+     setting. Same values as the shared dark scheme in css/site.css — no new
+     tokens, no new styles, nothing that can reach another app's pages. */
+  body[data-theme="dark"] {
+    --bg: var(--coal);
+    --fg: #F2F0EC;
+    --muted: #98938B;
+    --line: #2B2823;
+    --card: #1D1B18;
+    --accent: var(--accent-d);
+  }
+  body[data-theme="dark"] .themed { --accent: var(--accent-d); }
+</style>
+</head>
+<body class="themed" data-app="dose" data-theme="dark" style="--accent-l:#34D399;--accent-d:#3FE3A9">
+<div class="wrap">
+  <header class="top">
+    <a href="../../">simpleappsdev</a><span class="dot"></span>
+  </header>
+
+  <main class="doc">
+    <h1>Support</h1>
+    <p class="lede">Something not working, or a question the App Store listing doesn’t answer? Write to me. The answers people ask for most are below.</p>
+
+    <!-- static mirror of supportEmail in apps.json; the script rewrites it from
+         the data on load and appends responseTime when it is set -->
+    <p id="contact">Email me at <a href="mailto:support@simpleappsdev.com">support@simpleappsdev.com</a>.</p>
+
+    <h2>How do I restore my purchase?</h2>
+    <p>Open Settings inside Dose and tap <strong>Restore purchase</strong>. As long as you’re signed in with the Apple ID you bought it with, the unlock comes back — on a new phone too. Nothing is tied to the old device.</p>
+
+    <h2>What does the free trial include, and when does it end?</h2>
+    <p>The whole app, for 7 days from the day you install it. After that a one-time $0.99 unlock keeps it going. There is no subscription, no renewal and nothing to cancel.</p>
+    <p>Taking a dose is never behind the paywall, during the trial or after it. Even if the trial has run out and you haven’t bought the app, you can still open it and mark today’s doses taken — that part is never locked. What the unlock covers is creating and editing stacks and inventory items.</p>
+
+    <h2>Will Dose remind me if I don’t open the app?</h2>
+    <p>Yes. Reminders are scheduled on your iPhone and fire whether or not the app is running — no server, no internet needed. You get one reminder per stack per scheduled time, not one per item in it, and you can snooze it for 10, 30 or 60 minutes depending on what you’ve picked in Settings.</p>
+    <p>Dose also tells you when an item is running low, once every few days at most so it can’t nag. One switch in Settings turns all of it off.</p>
+
+    <h2>I only took some of a stack, or I marked one by mistake</h2>
+    <p>Open the stack and check off just the items you actually took — the rest stay pending and the stack stays on your Today screen. <strong>Skip rest</strong> marks what’s left as skipped without touching your inventory, which is the honest option for a dose you genuinely didn’t take.</p>
+    <p>If you got it wrong, tap the entry again under Done and undo it. Whatever you undo goes back onto your count, using the amount that was actually recorded at the time — so correcting a mistake never leaves your stock wrong.</p>
+
+    <h2>Where does “About 12 days” come from?</h2>
+    <p>From your own schedule: how much of an item each stack takes, times how often that stack is scheduled. Change a schedule and the estimate follows it. When an item drops near the end, Dose moves it to <strong>Running low</strong> and tells you, while there’s still time to reorder — you can set how much warning you want, per item or for everything.</p>
+    <p>Don’t want to count something? Leave it untracked, or tap <strong>I’ll count later</strong> when you add it. Untracked items still get reminders; they just don’t show a count and never tell you they’re low.</p>
+
+    <h2>Do I need an account?</h2>
+    <p>No. Dose has no sign-up and never asks for an email address, and nothing it stores leaves your phone. See the <a href="../privacy/">privacy page</a> for what that means in detail.</p>
+
+    <p class="meta"><a href="../">Back to Dose</a></p>
+  </main>
+
+  <footer class="foot" id="foot">
+    <a href="../">Dose</a>
+    <a href="../privacy/">Privacy</a>
+  </footer>
+</div>
+<script>
+(function () {
+  function val(v) {
+    return (typeof v === 'string' && v !== '' && v.slice(0, 5) !== 'TODO:') ? v : null;
+  }
+  fetch('../../apps.json')
+    .then(function (r) {
+      if (!r.ok) throw new Error('apps.json ' + r.status);
+      return r.json();
+    })
+    .then(function (data) {
+      var mail = val(data.supportEmail);
+      var contact = document.getElementById('contact');
+      contact.textContent = 'Support is by email.';
+      if (mail) {
+        contact.textContent = 'Email me at ';
+        var a = document.createElement('a');
+        a.href = 'mailto:' + mail;
+        a.textContent = mail;
+        contact.appendChild(a);
+        contact.appendChild(document.createTextNode('.'));
+      }
+      /* the reply window is the owner's promise to make — say nothing until it's set */
+      var response = val(data.responseTime);
+      if (response) {
+        contact.appendChild(document.createTextNode(' ' + response));
+      }
+    })
+    .catch(function (err) {
+      /* every answer on this page is static and still readable */
+      console.error('Could not load apps.json:', err);
+    });
+})();
+</script>
+</body>
+</html>
