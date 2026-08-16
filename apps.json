@@ -36,7 +36,7 @@
       "schemes": ["dark"],
       "shots": 4,
       "status": "pending",
-      "icon": "TODO:icon"
+      "icon": "assets/icons/dose.png"
     }
   ]
 }
