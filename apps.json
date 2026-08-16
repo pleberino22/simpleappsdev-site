@@ -18,7 +18,7 @@
       "requires": "Requires an iPhone running iOS 17 or later.",
       "theme": "auto",
       "schemes": ["light", "dark"],
-      "shots": 4,
+      "shots": 5,
       "status": "live",
       "icon": "assets/icons/kcal.png"
     }
