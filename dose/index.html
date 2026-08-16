@@ -31,12 +31,14 @@
     <p class="pitch">One reminder. Not one per pill.</p>
     <p class="sub">Group what you take, take it in one tap, and know when to reorder.</p>
     <!-- STATIC MIRROR OF apps.json — keep the two in step.
-         Dose is pending, so this is the "Coming soon" element and must stay
-         that way until the app is actually on sale, at which point status
-         flips to live and appStoreUrl arrives in apps.json in the same edit.
-         Never a badge with a dead href. -->
+         Dose is on sale, so this is the badge, carrying the same tokenised
+         appStoreUrl the data does. If the app ever comes off sale, this goes
+         back to <span class="soon">Coming soon</span> in the same edit that
+         drops appStoreUrl — never a badge with a dead href. -->
     <div class="cta" id="cta">
-      <span class="soon">Coming soon</span>
+      <a class="badge" href="https://apps.apple.com/app/id6794703600?ct=web_dose&amp;mt=8">
+        <img src="../assets/appstore-badge.svg" alt="Download on the App Store" width="176" height="52">
+      </a>
     </div>
     <p class="price-line" id="price-line"><strong>$0.99</strong> one-time, after a 7-day free trial. No subscription.</p>
   </section>
