@@ -34,10 +34,11 @@
     <p>Kcal has no sign-up, no login, no email field and no profile. It never asks who you are, and it collects no name, age, height or weight. Nothing you log can be traced back to you, because there is nothing to trace it to.</p>
 
     <h2>What leaves your phone, and when</h2>
-    <p>Four features look something up online. Each one sends only what it needs, and only at the moment you use it:</p>
+    <p>Five features look something up online. Each one sends only what it needs, and only at the moment you use it:</p>
     <ul>
       <li><strong>Scanning a barcode</strong> sends the barcode number to the Open Food Facts database. If the product isn’t there, the number is then sent to FatSecret. Nothing else goes with it.</li>
       <li><strong>Searching for a food</strong> sends the words you type to USDA FoodData Central and to FatSecret, which return matching foods and their nutrition values.</li>
+      <li><strong>Photographing a nutrition label</strong> sends that photo to Groq, which reads the printed table and sends back the numbers on it. It returns numbers only — never a product name, and no food database is searched. You name the food yourself, and every value stays editable before you save.</li>
       <li><strong>Estimating a meal from a photo</strong> resizes the photo and sends it to Groq, which returns an estimate you can edit before saving. The photo is sent for that estimate and for nothing else.</li>
       <li><strong>Describing a meal in words</strong> sends the description you type to Groq, which returns the same kind of estimate.</li>
     </ul>
@@ -45,7 +46,7 @@
     <p>Everything else in Kcal — logging, editing, the ring, the calendar, streaks, your library and recipes, reminders — works with no network connection at all.</p>
 
     <h2>Camera and photos</h2>
-    <p>Kcal asks for camera access for two things: scanning a barcode, and taking a photo of a meal for an estimate. You can also pick an existing photo from your library instead. The app doesn’t save photos, doesn’t build an album, and has no access to your photo library beyond the single picture you choose. If you decline camera access, every other way of logging still works.</p>
+    <p>Kcal asks for camera access for three things: scanning a barcode, photographing a nutrition label, and taking a photo of a meal for an estimate. For the last two you can pick an existing photo from your library instead. Barcode scanning reads the code on the device and never sends a picture anywhere; the label and meal photos are the only images that leave your phone, and only for the read you asked for. The app doesn’t save photos, doesn’t build an album, and has no access to your photo library beyond the single picture you choose. If you decline camera access, every other way of logging still works.</p>
 
     <h2>Notifications</h2>
     <p>Meal reminders are optional and off unless you turn them on, either during setup or later in Settings. They are scheduled by your iPhone, on your iPhone — no reminder is sent from anywhere else, and none of them report back. Turning the switch off cancels them.</p>
@@ -65,7 +66,7 @@
     <p id="contact">Anything on this page you’d like clarified, ask: <a href="mailto:support@simpleappsdev.com">support@simpleappsdev.com</a>.</p>
 
     <p class="meta">Powered by FatSecret.<br>
-    Last updated 11 August 2026.</p>
+    Last updated 16 August 2026.</p>
   </main>
 
   <footer class="foot" id="foot">

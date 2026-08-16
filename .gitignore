@@ -1,2 +1,6 @@
 *-status.md
 .DS_Store
+
+# raw captures are dropped here for conversion, never committed —
+# the multi-MB originals live in the app repo, the site ships the WebP
+raw/

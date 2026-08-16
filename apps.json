@@ -20,7 +20,7 @@
       "schemes": ["light", "dark"],
       "shots": 4,
       "status": "live",
-      "icon": "TODO:icon"
+      "icon": "assets/icons/kcal.png"
     }
   ]
 }
