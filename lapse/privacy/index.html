@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Lapse — Privacy</title>
+<meta name="description" content="What Lapse stores, the one thing that leaves your iPhone, and what it never collects.">
+<link rel="canonical" href="https://simpleappsdev.com/lapse/privacy/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lapse — Privacy">
+<meta property="og:description" content="What Lapse stores, the one thing that leaves your iPhone, and what it never collects.">
+<meta property="og:url" content="https://simpleappsdev.com/lapse/privacy/">
+<meta property="og:image" content="https://simpleappsdev.com/assets/og/lapse.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../../css/site.css">
+</head>
+<body class="themed" data-app="lapse" style="--accent-l:#2F6FED;--accent-d:#4C84FF">
+<div class="wrap">
+  <header class="top">
+    <a href="../../">simpleappsdev</a><span class="dot"></span>
+  </header>
+
+  <main class="doc">
+    <h1>Privacy</h1>
+    <p class="lede">Lapse knows your passport number is due for renewal. It doesn’t know your passport number, and it never sends anything about you anywhere.</p>
+
+    <h2>Your items stay on your iPhone</h2>
+    <p>Everything you enter — what you track, the dates, the amounts, the notes, the categories — is stored in Lapse’s own database on the device. It is not copied to a server, and there is no server to copy it to. Nobody else can read it, including me.</p>
+
+    <h2>There is no account</h2>
+    <p>No sign-up, no login, no email address, no profile. Lapse never asks who you are. There is also no sync, no backup of its own and no export — the data lives on the phone and stays there.</p>
+
+    <h2>The one thing that leaves the device</h2>
+    <p>Lapse makes a single kind of network request, and only if you track amounts in more than one currency: it asks ExchangeRate-API for the day’s exchange rates.</p>
+    <p><strong>That request carries one piece of information — the currency code you’ve chosen to display totals in</strong>, such as EUR or USD. Nothing about what you track goes with it: not a title, not an amount, not a date, not an identifier for you or your phone. The rates come back, are stored on the device, and the conversion happens there.</p>
+    <p>The rates are fetched at most once a day and kept afterwards, so the app works offline; if a fetch fails it quietly keeps using the ones it already has. That is the whole of Lapse’s network activity. Everything else — the calendar, the reminders, the totals — works with no connection at all.</p>
+
+    <h2>Notifications are the only permission</h2>
+    <p>Lapse asks for one thing: permission to send notifications, and only when you first need them — during setup, or when you save your first item. It never asks at launch.</p>
+    <p>Each item gets at most three reminders: when its notice period opens, once in the middle if that period is long, and on the day itself. They are scheduled by your iPhone, on your iPhone; nothing is sent from anywhere else and none of them report back. Lapse asks for no camera, no photos, no contacts, no location and no health data.</p>
+
+    <h2>Purchases</h2>
+    <p>The 7-day trial and the one-time unlock are handled entirely by Apple’s In-App Purchase system. Payment happens in Apple’s sheet, not in Lapse, and I never see your card, your billing details or your Apple ID. Lapse only learns whether the unlock has been purchased.</p>
+
+    <h2>No analytics, no tracking, no ads</h2>
+    <p>There is no analytics package, no advertising and no tracking of any kind, and no third-party code in the app at all. Lapse never asks to track you across other apps, because it has nothing to track you with.</p>
+
+    <h2>Deleting your data</h2>
+    <p>Delete the app and everything it stored goes with it, cached rates included. There is no backup on my side, no account to close and no deletion request to file. Inside the app, any item or category can be deleted on its own.</p>
+
+    <h2>Questions</h2>
+    <!-- static mirror of supportEmail in apps.json; the script rewrites it from
+         the data on load, and omits the address entirely if it is unset -->
+    <p id="contact">Anything on this page you’d like clarified, ask: <a href="mailto:support@simpleappsdev.com">support@simpleappsdev.com</a>.</p>
+
+    <p class="meta">Exchange rates by <a href="https://www.exchangerate-api.com">ExchangeRate-API</a>.<br>
+    Last updated 16 August 2026.</p>
+  </main>
+
+  <footer class="foot" id="foot">
+    <a href="../">Lapse</a>
+    <a href="../support/">Support</a>
+  </footer>
+</div>
+<script>
+(function () {
+  function val(v) {
+    return (typeof v === 'string' && v !== '' && v.slice(0, 5) !== 'TODO:') ? v : null;
+  }
+  fetch('../../apps.json')
+    .then(function (r) {
+      if (!r.ok) throw new Error('apps.json ' + r.status);
+      return r.json();
+    })
+    .then(function (data) {
+      var p = document.getElementById('contact');
+      var mail = val(data.supportEmail);
+      if (!mail) {
+        p.textContent = 'Anything on this page you’d like clarified, just ask.';
+        return;
+      }
+      p.textContent = 'Anything on this page you’d like clarified, ask: ';
+      var a = document.createElement('a');
+      a.href = 'mailto:' + mail;
+      a.textContent = mail;
+      p.appendChild(a);
+      p.appendChild(document.createTextNode('.'));
+    })
+    .catch(function (err) {
+      /* the page is static prose; only the address is data */
+      console.error('Could not load apps.json:', err);
+    });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Lapse — Support</title>
+<meta name="description" content="Help with Lapse: restoring a purchase, the free trial, the ring and the dot, the monthly total, currencies and reminders.">
+<link rel="canonical" href="https://simpleappsdev.com/lapse/support/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lapse — Support">
+<meta property="og:description" content="Help with Lapse: restoring a purchase, the free trial, the ring and the dot, the monthly total, currencies and reminders.">
+<meta property="og:url" content="https://simpleappsdev.com/lapse/support/">
+<meta property="og:image" content="https://simpleappsdev.com/assets/og/lapse.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../../css/site.css">
+</head>
+<body class="themed" data-app="lapse" style="--accent-l:#2F6FED;--accent-d:#4C84FF">
+<div class="wrap">
+  <header class="top">
+    <a href="../../">simpleappsdev</a><span class="dot"></span>
+  </header>
+
+  <main class="doc">
+    <h1>Support</h1>
+    <p class="lede">Something not working, or a question the App Store listing doesn’t answer? Write to me. The answers people ask for most are below.</p>
+
+    <!-- static mirror of supportEmail in apps.json; the script rewrites it from
+         the data on load and appends responseTime when it is set -->
+    <p id="contact">Email me at <a href="mailto:support@simpleappsdev.com">support@simpleappsdev.com</a>.</p>
+
+    <h2>How do I restore my purchase?</h2>
+    <p>Open Settings inside Lapse and tap <strong>Restore purchase</strong>. As long as you’re signed in with the Apple ID you bought it with, the unlock comes back — on a new phone too. Nothing is tied to the old device.</p>
+
+    <h2>What does the free trial include, and when does it end?</h2>
+    <p>The whole app, for 7 days from the day you install it. After that a one-time $0.99 unlock keeps it going. There is no subscription, no renewal and nothing to cancel.</p>
+    <p>Seeing your calendar, renewing an item and getting your reminders are never behind the paywall — not during the trial, not after it. Locking you out of the dates you already entered would defeat the point. What the unlock covers is adding and editing items, and managing categories.</p>
+
+    <h2>What’s the difference between the ring and the dot?</h2>
+    <p>The filled <strong>dot</strong> is the date itself — the day the money moves, or the day the document expires. The hollow <strong>ring</strong> is the day to start dealing with it, worked out from the notice period you gave that item. The thin line between them on the calendar is the window you have.</p>
+    <p>If you set no notice period, the two land on the same day and are drawn as a single mark. And a subscription that renews itself gets a dot only — there’s nothing for you to start doing, so Lapse doesn’t draw an action you don’t have to take. You still get the reminders either way.</p>
+
+    <h2>The number under the calendar doesn’t match what I expected</h2>
+    <p>By default it’s the cash figure: what actually leaves your account in the month you’re looking at. Swipe to another month and it changes, because a quarterly bill only lands in some of them. One-off items with a fee aren’t counted — a passport fee isn’t a running cost.</p>
+    <p><strong>Tap the number</strong> and it switches to the average per month instead, which spreads a yearly policy and a weekly bill onto the same scale. That’s the number to use when comparing two things; the cash figure is the one that matches the dots above it. Lapse remembers which you prefer.</p>
+
+    <h2>Some of my amounts aren’t being counted</h2>
+    <p>If you track amounts in several currencies, Lapse converts them into the one you’ve set for totals, using rates it fetches once a day and keeps for offline use. When a currency has no rate available, that item is left out of the total and the card says so rather than quietly dropping it. If no rates have ever been fetched, you get one total per currency instead of an invented single number.</p>
+
+    <h2>When do reminders arrive?</h2>
+    <p>At most three per item: when its notice period opens, once in the middle if that period runs longer than a month, and on the day itself — all at the one daily time you pick in Settings. There is no repeating nudge and no escalation. The app is meant to be opened rarely.</p>
+
+    <h2>Do I need an account?</h2>
+    <p>No. Lapse has no sign-up and never asks for an email address. See the <a href="../privacy/">privacy page</a> for the one thing that does leave your phone, and what it contains.</p>
+
+    <p class="meta"><a href="../">Back to Lapse</a></p>
+  </main>
+
+  <footer class="foot" id="foot">
+    <a href="../">Lapse</a>
+    <a href="../privacy/">Privacy</a>
+  </footer>
+</div>
+<script>
+(function () {
+  function val(v) {
+    return (typeof v === 'string' && v !== '' && v.slice(0, 5) !== 'TODO:') ? v : null;
+  }
+  fetch('../../apps.json')
+    .then(function (r) {
+      if (!r.ok) throw new Error('apps.json ' + r.status);
+      return r.json();
+    })
+    .then(function (data) {
+      var mail = val(data.supportEmail);
+      var contact = document.getElementById('contact');
+      contact.textContent = 'Support is by email.';
+      if (mail) {
+        contact.textContent = 'Email me at ';
+        var a = document.createElement('a');
+        a.href = 'mailto:' + mail;
+        a.textContent = mail;
+        contact.appendChild(a);
+        contact.appendChild(document.createTextNode('.'));
+      }
+      /* the reply window is the owner's promise to make — say nothing until it's set */
+      var response = val(data.responseTime);
+      if (response) {
+        contact.appendChild(document.createTextNode(' ' + response));
+      }
+    })
+    .catch(function (err) {
+      /* every answer on this page is static and still readable */
+      console.error('Could not load apps.json:', err);
+    });
+})();
+</script>
+</body>
+</html>

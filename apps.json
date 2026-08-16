@@ -38,6 +38,22 @@
       "shots": 4,
       "status": "live",
       "icon": "assets/icons/dose.png"
+    },
+    {
+      "id": "lapse",
+      "name": "Lapse",
+      "tagline": "Nothing runs out without warning.",
+      "price": "$0.99",
+      "priceRest": " one-time, after a 7-day free trial. No subscription.",
+      "accentLight": "#2F6FED",
+      "accentDark": "#4C84FF",
+      "url": "lapse/",
+      "requires": "Requires an iPhone running iOS 17 or later.",
+      "theme": "auto",
+      "schemes": ["light", "dark"],
+      "shots": 4,
+      "status": "pending",
+      "icon": "assets/icons/lapse.png"
     }
   ]
 }
