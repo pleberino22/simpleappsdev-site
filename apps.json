@@ -14,7 +14,7 @@
       "accentLight": "#FF7A00",
       "accentDark": "#FF8F2A",
       "url": "kcal/",
-      "appStoreUrl": "https://apps.apple.com/app/id6786282885",
+      "appStoreUrl": "https://apps.apple.com/app/id6786282885?ct=web_kcal&mt=8",
       "requires": "Requires an iPhone running iOS 17 or later.",
       "theme": "auto",
       "schemes": ["light", "dark"],
