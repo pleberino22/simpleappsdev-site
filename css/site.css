@@ -45,6 +45,19 @@
   .themed { --accent: var(--accent-d); }
 }
 
+/* a dark-only app pins the dark scheme whatever the visitor's setting is —
+   the page should show what the product is. Same six values as the media
+   query above; they are one unit and must be changed together. */
+body[data-theme="dark"] {
+  --bg: var(--coal);
+  --fg: #F2F0EC;
+  --muted: #98938B;
+  --line: #2B2823;
+  --card: #1D1B18;
+  --accent: var(--accent-d);
+}
+body[data-theme="dark"] .themed { --accent: var(--accent-d); }
+
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
 body {

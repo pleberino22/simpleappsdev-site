@@ -99,6 +99,11 @@ As of now: **Dose is dark-only** — it enforces dark at the window level and ha
 no appearance setting, so `"theme": "dark"`, `"schemes": ["dark"]`. Kcal and
 Lapse are `auto` with both sets.
 
+`theme: "dark"` is carried into the markup by `data-theme="dark"` on `<body>`,
+which `css/site.css` resolves to the same six values as the dark media query.
+It lives in the shared stylesheet, not in the page: a dark-only app adds one
+attribute and inherits the scheme, and no app page carries CSS of its own.
+
 ### status
 
 `live` or `pending`.
@@ -328,7 +333,18 @@ captions must be gone once real captures land.
 
 Captures are exported at 1320×2868 and converted for the web by `shots.sh`
 (WebP, ~600px wide, under 150KB each). Never ship the native-resolution PNGs:
-the traffic is mobile and mostly on cellular.
+the traffic is mobile and mostly on cellular. The originals stay in the app's
+own repo; only the WebP belongs here.
+
+### Open Graph images
+
+`og.py` at the repo root generates `assets/og/home.png` and one
+`assets/og/<app>.png` per app, at 1200×630, from `apps.json` — the app's accent
+and wordmark in the `.tile` visual language. Run `python3 og.py` after adding an
+app or editing a name, tagline or accent. It reads only `apps.json` and holds no
+copy of its own, and it is deterministic: unchanged data regenerates
+byte-identical files, so a re-run is invisible to git unless something really
+changed.
 
 ---
 
