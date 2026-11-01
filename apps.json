@@ -17,7 +17,10 @@
       "appStoreUrl": "https://apps.apple.com/app/id6786282885?ct=web_kcal&mt=8",
       "requires": "Requires an iPhone running iOS 17 or later.",
       "theme": "auto",
-      "schemes": ["light", "dark"],
+      "schemes": [
+        "light",
+        "dark"
+      ],
       "shots": 5,
       "status": "live",
       "icon": "assets/icons/kcal.png"
@@ -34,7 +37,9 @@
       "appStoreUrl": "https://apps.apple.com/app/id6794703600?ct=web_dose&mt=8",
       "requires": "Requires an iPhone running iOS 17 or later.",
       "theme": "dark",
-      "schemes": ["dark"],
+      "schemes": [
+        "dark"
+      ],
       "shots": 4,
       "status": "live",
       "icon": "assets/icons/dose.png"
@@ -50,10 +55,31 @@
       "url": "lapse/",
       "requires": "Requires an iPhone running iOS 17 or later.",
       "theme": "auto",
-      "schemes": ["light", "dark"],
+      "schemes": [
+        "light",
+        "dark"
+      ],
       "shots": 4,
       "status": "pending",
       "icon": "assets/icons/lapse.png"
+    },
+    {
+      "id": "form",
+      "name": "FORM",
+      "tagline": "Body progress photos and weight.",
+      "price": "$1.00",
+      "priceRest": " one-time, after a 7-day free trial. No subscription.",
+      "accentLight": "#B37C4F",
+      "accentDark": "#D6AB7A",
+      "url": "form/",
+      "requires": "Requires an iPhone running iOS 17 or later.",
+      "theme": "dark",
+      "schemes": [
+        "dark"
+      ],
+      "shots": 6,
+      "status": "pending",
+      "icon": "assets/icons/form.png"
     }
   ]
 }
