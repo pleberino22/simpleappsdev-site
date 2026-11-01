@@ -68,7 +68,7 @@
       "name": "Form",
       "tagline": "Body progress photos and weight.",
       "price": "$0.99",
-      "priceRest": " one-time, after a 7-day free trial. No subscription.",
+      "priceRest": " optional one-time unlock after 7 days free. No subscription or automatic charge.",
       "accentLight": "#B37C4F",
       "accentDark": "#D6AB7A",
       "url": "form/",
@@ -77,7 +77,7 @@
       "schemes": [
         "dark"
       ],
-      "shots": 6,
+      "shots": 8,
       "status": "pending",
       "icon": "assets/icons/form.png"
     }
