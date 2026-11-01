@@ -10,7 +10,7 @@
       "name": "Kcal",
       "tagline": "Calories and macros. Nothing else.",
       "price": "$0.99",
-      "priceRest": " one-time, after a 7-day free trial. No subscription.",
+      "priceRest": " optional one-time unlock after 7 days free. No subscription or automatic charge. Local prices are shown in the app.",
       "accentLight": "#FF7A00",
       "accentDark": "#FF8F2A",
       "url": "kcal/",
@@ -21,9 +21,10 @@
         "light",
         "dark"
       ],
-      "shots": 5,
+      "shots": 8,
       "status": "live",
-      "icon": "assets/icons/kcal.png"
+      "icon": "assets/icons/kcal.png",
+      "shotStyle": "campaign"
     },
     {
       "id": "dose",

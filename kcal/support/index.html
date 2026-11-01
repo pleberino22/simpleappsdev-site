@@ -7,13 +7,13 @@
 <title>simpleappsdev — Kcal Support</title>
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<meta name="description" content="Help with Kcal: restoring a purchase, the free trial, barcode scanning, nutrition labels, AI estimates and deleting your data.">
+<meta name="description" content="Help with Kcal: the 7-day trial, one-time purchase, quick logging, backups, AI sharing and the upcoming 1.3 update.">
 <link rel="canonical" href="https://simpleappsdev.com/kcal/support/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Kcal — Support">
-<meta property="og:description" content="Help with Kcal: restoring a purchase, the free trial, barcode scanning, nutrition labels, AI estimates and deleting your data.">
+<meta property="og:description" content="Help with Kcal: the 7-day trial, one-time purchase, quick logging, backups, AI sharing and the upcoming 1.3 update.">
 <meta property="og:url" content="https://simpleappsdev.com/kcal/support/">
-<meta property="og:image" content="https://simpleappsdev.com/assets/og/kcal.png">
+<meta property="og:image" content="https://simpleappsdev.com/assets/og/kcal-update.jpg?v=13">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
@@ -27,36 +27,30 @@
 
   <main class="doc">
     <h1>Support</h1>
-    <p class="lede">Something not working, or a question the App Store listing doesn’t answer? Write to me. The answers people ask for most are below.</p>
-
-    <!-- static mirror of supportEmail in apps.json; the script rewrites it from
-         the data on load and appends responseTime when it is set -->
+    <p class="lede">Questions about your diary, the trial or the next update? Start here, or email me.</p>
+    <!-- Static mirror of supportEmail in apps.json. -->
     <p id="contact">Email me at <a href="mailto:support@simpleappsdev.com">support@simpleappsdev.com</a>.</p>
-
+    <h2>What happens after the 7-day trial?</h2>
+    <p>The trial starts when you first open Kcal. After 7 days, you can choose a one-time unlock to keep logging. It costs $0.99 in the US; your local price is shown in the app before purchase. There is no subscription or automatic charge and nothing to cancel. If you do not buy, your existing diary stays readable.</p>
     <h2>How do I restore my purchase?</h2>
-    <p>Open Settings inside Kcal and tap <strong>Restore purchase</strong>. As long as you’re signed in with the Apple ID you bought it with, the unlock comes back — on a new phone too. Nothing is tied to the old device.</p>
-
-    <h2>What does the free trial include, and when does it end?</h2>
-    <p>The whole app, for 7 days from the day you install it. Nothing is held back during the trial. After that a one-time $0.99 unlock keeps it going. There is no subscription, no renewal and nothing to cancel.</p>
-
-    <h2>The scanner can’t find my product</h2>
-    <p>Scanning uses the camera, so it needs camera access — if you declined it, iOS Settings › Kcal will let you switch it back on. Kcal then checks two food databases for the code, and some products simply aren’t in either one. When that happens, search for the food by name instead, or enter it manually once and save it to your library — after that it’s two taps forever.</p>
-
-    <h2>How does photographing a nutrition label work?</h2>
-    <p>Point it at the printed table on the package and the numbers are read off it and filled into a form for you — calories, protein, fat and carbs. You type the name yourself, because the label read never guesses one. Everything stays editable before you save, and the food is logged in grams.</p>
-    <p>Labels that print values per serving are converted for you, but only when the serving weight is printed in grams. A label whose serving is “1 cup” or “2 pieces” with no gram weight can’t be converted, and Kcal will say so rather than guess — enter that one by hand. Same if the table comes out blurred or cropped: it tells you instead of inventing a number.</p>
-
-    <h2>Why do I only get ten a day?</h2>
-    <p>Label reads, photo estimates and written descriptions share one daily limit of ten between them, and only ones that actually come back count against it — a failed attempt doesn’t cost you one. The counter resets at midnight, and the limit is the same during the trial as it is after you’ve bought the app.</p>
-    <p>Two label photos in quick succession can also come back asking you to wait a moment. That’s a separate short pause, not your daily ten — give it a minute and try again.</p>
-
+    <p>Open Kcal’s Settings and tap <strong>Restore purchase</strong>. Use the same Apple account you bought the unlock with. Restoring the purchase restores access; to move diary entries to a new phone, use a Kcal backup or your device backup.</p>
+    <h2>How can I log faster?</h2>
+    <p>Use <strong>Quick calories</strong> when you know the calorie value and do not need to enter macros. Save foods as favorites and reuse remembered portions, or choose <strong>Copy meal</strong> to review an earlier meal before adding a copy to another day. Your own foods and recipes are in Food Library.</p>
+    <h2>How do I back up or move my diary?</h2>
+    <p>Open Settings → <strong>Backup &amp; restore</strong>, choose <strong>Export backup</strong> and save the file somewhere private. On the other phone, choose <strong>Restore from backup</strong> and review the preview before merging. Existing data is kept and identical records are skipped. Goals and appearance are only restored if you choose to apply those settings. A diary backup does not transfer your purchase; use Restore purchase separately.</p>
+    <h2>Where are the widgets and one-tap favorite buttons?</h2>
+    <p>These are part of Kcal 1.3, which has been submitted to Apple. The website images preview that update; it is not in the current App Store release yet. Once 1.3 is released and installed, open Kcal once, then add a widget from your iPhone’s Home Screen or Lock Screen. The update also adds app-icon actions and Shortcuts.</p>
+    <h2>The scanner cannot find my product</h2>
+    <p>Allow camera access in iPhone Settings → Kcal. Some products are missing from the food databases; search by name, read the nutrition label or enter the food manually instead.</p>
+    <h2>How do nutrition-label photos work?</h2>
+    <p>Photograph the printed nutrition table and review the calories, protein, fat and carbs before saving. You enter the food’s name yourself. Per-serving labels need a printed gram weight for conversion. Labels per 100 ml, or servings stated only in cups or pieces, cannot be converted to grams safely; enter those manually using a weighed serving.</p>
+    <h2>Why do I only get ten AI requests a day?</h2>
+    <p>Meal-photo estimates, typed meal descriptions and nutrition-label reads share 10 successful requests per day. Failed requests do not use one. The limit resets at midnight and is the same during the trial and after purchase. If the service asks you to wait, try again later; buying the unlock does not remove this allowance.</p>
+    <h2>Can I stop sharing photos or descriptions with AI?</h2>
+    <p>Yes. Withdraw AI-sharing permission in Settings. AI entry will ask for permission before sending selected content again. Your existing diary remains available, and manual entry does not need AI sharing.</p>
     <h2>How do I delete my data?</h2>
-    <p>Delete the app. Everything Kcal stored is on your phone and goes with it — there’s no account and no copy anywhere else. To clear things individually, swipe to delete entries in a meal, or foods and recipes in your library.</p>
-
-    <h2>Do I need an account?</h2>
-    <p>No. Kcal has no sign-up and never asks for an email address. See the <a href="../privacy/">privacy page</a> for what that means in detail.</p>
-
-    <p class="meta"><a href="../">Back to Kcal</a></p>
+    <p>Delete individual diary entries, foods or recipes in Kcal, or delete the app to remove its local data. Also delete any exported backups you no longer need; removing the app does not remove files saved elsewhere. Kcal has no account to close.</p>
+    <p class="meta"><a href="../privacy/">Read the privacy page</a> · <a href="../">Back to Kcal</a></p>
   </main>
 
   <footer class="foot" id="foot">

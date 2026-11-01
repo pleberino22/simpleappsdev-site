@@ -4,133 +4,71 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<title>simpleappsdev — Kcal</title>
+<title>simpleappsdev — Kcal Calorie Tracker</title>
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<meta name="description" content="Kcal is a radically simple calorie and macro tracker for iPhone. $0.99 one-time after a 7-day free trial.">
+<meta name="description" content="A simple calorie and macro diary for iPhone. Quick calories, favorite foods, meal copying and backups. Try 7 days free, then choose a one-time unlock.">
 <link rel="canonical" href="https://simpleappsdev.com/kcal/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Kcal — one number, three macros, no noise">
-<meta property="og:description" content="A radically simple calorie and macro tracker for iPhone. $0.99 one-time after a 7-day free trial.">
+<meta property="og:title" content="Kcal — Your day. Made simple.">
+<meta property="og:description" content="A simple food diary for iPhone. Seven days free, then an optional one-time unlock. No subscription or automatic charge.">
 <meta property="og:url" content="https://simpleappsdev.com/kcal/">
-<meta property="og:image" content="https://simpleappsdev.com/assets/og/kcal.png">
+<meta property="og:image" content="https://simpleappsdev.com/assets/og/kcal-update.jpg?v=13">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="../css/site.css">
 </head>
 <body class="themed" data-app="kcal" style="--accent-l:#FF7A00;--accent-d:#FF8F2A">
+<div class="wrap"><header class="top"><a href="../">simpleappsdev</a><span class="dot"></span></header></div>
+<main>
 <div class="wrap">
-  <header class="top">
-    <a href="../">simpleappsdev</a><span class="dot"></span>
-  </header>
-
   <section class="hero">
     <div class="hero-id">
-      <span class="tile tile-lg" id="hero-tile" aria-hidden="true">Kcal</span>
+      <img class="tile tile-lg" id="hero-tile" src="../assets/icons/kcal.png" alt="" width="88" height="88">
       <h1>Kcal</h1>
     </div>
-    <p class="pitch">One number. Three macros. No noise.</p>
-    <p class="sub">Log what you eat. See your calories and macros. Nothing else.</p>
-    <!-- STATIC MIRROR OF apps.json — keep the two in step.
-         This is what a visitor with no JavaScript, or with a failed fetch,
-         gets; the script replaces it from the data on load. When apps.json
-         carries no appStoreUrl, or the app is pending, this must be the
-         "Coming soon" span instead — never a badge with a dead href:
-         <span class="soon">Coming soon</span> -->
-    <div class="cta" id="cta">
-      <a class="badge" href="https://apps.apple.com/app/id6786282885?ct=web_kcal&amp;mt=8">
-        <img src="../assets/appstore-badge.svg" alt="Download on the App Store" width="176" height="52">
-      </a>
-    </div>
-    <p class="price-line" id="price-line"><strong>$0.99</strong> one-time, after a 7-day free trial. No subscription.</p>
+    <p class="pitch">Your day. Made simple.</p>
+    <p class="sub">Log your food. See what’s left. Get on with your day.</p>
+    <!-- Static mirror of the Kcal entry in apps.json. -->
+    <div class="cta" id="cta"><a class="badge" href="https://apps.apple.com/app/id6786282885?ct=web_kcal&amp;mt=8"><img src="../assets/appstore-badge.svg" alt="Download on the App Store" width="176" height="52"></a></div>
+    <p class="price-line" id="price-line"><strong>$0.99</strong> optional one-time unlock after 7 days free. No subscription or automatic charge. Local prices are shown in the app.</p>
+  </section>
+  <figure style="margin:0 0 var(--sp-7)"><img src="../assets/og/kcal-header.webp?v=13" alt="Kcal: Your day. Made simple. An orange calorie ring surrounds a breakfast bowl." width="1600" height="686" style="display:block;width:100%;height:auto;border-radius:var(--r-m)" decoding="async"></figure>
+  <section class="fine" aria-label="Kcal 1.3 preview">
+    <p><strong>Next update: Kcal 1.3</strong></p>
+    <p>Home Screen and Lock Screen widgets, shortcuts, favorite portions with Undo, and a clearer setup. The update has been submitted to Apple; these additions are not in the current App Store release yet.</p>
+    <p>The images below preview Kcal 1.3 with sample data. The header is illustrative brand artwork.</p>
   </section>
 </div>
-
-<!-- five slots, one per screen: 1 home · 2 log sheet · 3 nutrition label ·
-     4 search · 5 calendar.
-     a light and a dark capture of the same screen are one slot — the set swaps
-     with the colour scheme. captures are 600×1304, the 1320×2868 originals
-     scaled; the width/height below are the real file dimensions. -->
-<div class="shots" aria-label="Screenshots">
-  <figure class="shot">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="../assets/shots/kcal/dark-1.webp">
-      <img src="../assets/shots/kcal/light-1.webp" alt="" width="600" height="1304" loading="lazy" decoding="async">
-    </picture>
-  </figure>
-  <figure class="shot">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="../assets/shots/kcal/dark-2.webp">
-      <img src="../assets/shots/kcal/light-2.webp" alt="" width="600" height="1304" loading="lazy" decoding="async">
-    </picture>
-  </figure>
-  <figure class="shot">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="../assets/shots/kcal/dark-3.webp">
-      <img src="../assets/shots/kcal/light-3.webp" alt="" width="600" height="1304" loading="lazy" decoding="async">
-    </picture>
-  </figure>
-  <figure class="shot">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="../assets/shots/kcal/dark-4.webp">
-      <img src="../assets/shots/kcal/light-4.webp" alt="" width="600" height="1304" loading="lazy" decoding="async">
-    </picture>
-  </figure>
-  <figure class="shot">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="../assets/shots/kcal/dark-5.webp">
-      <img src="../assets/shots/kcal/light-5.webp" alt="" width="600" height="1304" loading="lazy" decoding="async">
-    </picture>
-  </figure>
+<div class="shots" aria-label="Kcal 1.3 preview screenshots" tabindex="0">
+  <figure class="shot"><img src="../assets/shots/kcal/campaign-1.webp?v=13" alt="A clear daily calorie balance and four meal cards" width="600" height="1304" loading="lazy" decoding="async"></figure>
+  <figure class="shot"><img src="../assets/shots/kcal/campaign-2.webp?v=13" alt="Home Screen widgets with calorie balance and logging shortcuts" width="600" height="1304" loading="lazy" decoding="async"></figure>
+  <figure class="shot"><img src="../assets/shots/kcal/campaign-3.webp?v=13" alt="Favorite foods with shown portions and quick-add buttons" width="600" height="1304" loading="lazy" decoding="async"></figure>
+  <figure class="shot"><img src="../assets/shots/kcal/campaign-4.webp?v=13" alt="Barcode, search, nutrition-label, photo and manual logging options" width="600" height="1304" loading="lazy" decoding="async"></figure>
+  <figure class="shot"><img src="../assets/shots/kcal/campaign-5.webp?v=13" alt="Review a meal before copying it to today" width="600" height="1304" loading="lazy" decoding="async"></figure>
+  <figure class="shot"><img src="../assets/shots/kcal/campaign-6.webp?v=13" alt="Quick calorie entry without filling in macros" width="600" height="1304" loading="lazy" decoding="async"></figure>
+  <figure class="shot"><img src="../assets/shots/kcal/campaign-7.webp?v=13" alt="A personal food and recipe library" width="600" height="1304" loading="lazy" decoding="async"></figure>
+  <figure class="shot"><img src="../assets/shots/kcal/campaign-8.webp?v=13" alt="Export a backup or preview a restore" width="600" height="1304" loading="lazy" decoding="async"></figure>
 </div>
-
 <div class="wrap">
-  <section class="features">
-    <article class="feature">
-      <span class="num">01</span>
-      <h2>One ring</h2>
-      <p>Your whole day on one screen: remaining calories in the center, protein, fat and carbs beneath, four fixed meals — Breakfast, Lunch, Dinner, Snack. Swipe back through any past day.</p>
-    </article>
-    <article class="feature">
-      <span class="num">02</span>
-      <h2>Six ways to log</h2>
-      <p>Scan a barcode, search a food database, photograph a nutrition label and have its numbers read off it, snap your plate or describe it in words for an AI estimate, or just type it in. Label reads, photo estimates and descriptions share ten a day between them. Your own foods and recipes live in a small library, and recent foods are one tap away.</p>
-    </article>
-    <article class="feature">
-      <span class="num">03</span>
-      <h2>Streaks, not guilt</h2>
-      <p>A flame counts your consecutive logged days. The calendar marks days within budget. Forget a meal and Kcal nudges you once — one switch, no schedule to configure.</p>
-    </article>
+  <section class="features" aria-label="Available in Kcal today">
+    <article class="feature"><span class="num">01</span><h2>Your day, clearly</h2><p>Remaining calories, protein, fat and carbs, plus four meal cards on one fixed screen. Browse earlier days and choose goals that suit you.</p></article>
+    <article class="feature"><span class="num">02</span><h2>Less effort to log</h2><p>Scan, search, photograph or type your food. Use Quick calories when you know the value, keep favorite foods and remembered portions, or review and copy a meal from another day.</p></article>
+    <article class="feature"><span class="num">03</span><h2>A diary you keep</h2><p>Your foods, recipes and history stay on your iPhone. Export a backup and preview it before restoring; existing entries are kept. No account, ads or subscription.</p></article>
   </section>
-
-  <section class="refuse">
-    <p class="kicker">What Kcal refuses to do</p>
-    <ul>
-      <li><span class="no">No fasting timer.</span></li>
-      <li><span class="no">No recipe feed.</span></li>
-      <li><span class="no">No step counting.</span></li>
-      <li><span class="no">No water log.</span></li>
-      <li><span class="no">No social anything.</span></li>
-    </ul>
-    <p class="coda">Crossed off on purpose.</p>
-  </section>
-
+  <section class="refuse"><p class="kicker">What Kcal refuses to do</p><ul><li><span class="no">No fasting timer.</span></li><li><span class="no">No recipe feed.</span></li><li><span class="no">No step counting.</span></li><li><span class="no">No water log.</span></li><li><span class="no">No social anything.</span></li></ul><p class="coda">Crossed off on purpose.</p></section>
   <section class="fine">
+    <p>The free trial starts when you first open Kcal. After 7 days, choose whether to unlock logging with one purchase. Your existing diary stays readable either way.</p>
+    <p>AI photo estimates, meal descriptions and nutrition-label reads share 10 successful requests a day, during the trial and after purchase. AI sharing needs your permission, and every estimate is editable before saving.</p>
     <p>Kcal provides general estimates, not medical advice. Consult a professional for personal guidance.</p>
     <p id="requires">Requires an iPhone running iOS 17 or later.</p>
   </section>
-
-  <section class="more" id="more" hidden>
-    <h2>More apps</h2>
-    <div class="more-row" id="more-row"></div>
-  </section>
-
-  <footer class="foot" id="foot">
-    <a href="privacy/">Privacy</a>
-    <a href="support/">Support</a>
-  </footer>
+  <!-- Static mirror of the other apps in apps.json. -->
+  <section class="more" id="more"><h2>More apps</h2><div class="more-row" id="more-row"><a class="themed" href="../dose/" style="--accent-l:#34D399;--accent-d:#3FE3A9"><img class="tile tile-sm" src="../assets/icons/dose.png" alt="" width="44" height="44"><span>Dose</span></a><a class="themed" href="../lapse/" style="--accent-l:#2F6FED;--accent-d:#4C84FF"><img class="tile tile-sm" src="../assets/icons/lapse.png" alt="" width="44" height="44"><span>Lapse</span></a><a class="themed" href="../form/" style="--accent-l:#B37C4F;--accent-d:#D6AB7A"><img class="tile tile-sm" src="../assets/icons/form.png" alt="" width="44" height="44"><span>Form</span></a></div></section>
 </div>
+</main>
+<div class="wrap"><footer class="foot" id="foot"><a href="privacy/">Privacy</a><a href="support/">Support</a></footer></div>
 <script>
 (function () {
   /* a value the owner hasn't filled in yet is marked, never empty — treat it as absent */
@@ -217,6 +155,7 @@
     var others = (data.apps || []).filter(function (a) { return a.id !== me; });
     if (others.length) {
       var row = document.getElementById('more-row');
+      row.textContent = '';
       others.forEach(function (o) {
         var a = document.createElement('a');
         a.className = 'themed';

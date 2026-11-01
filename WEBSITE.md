@@ -336,6 +336,15 @@ Captures are exported at 1320×2868 and converted for the web by `shots.sh`
 the traffic is mobile and mostly on cellular. The originals stay in the app's
 own repo; only the WebP belongs here.
 
+Kcal uses `shotStyle: "campaign"` for its eight captioned 1.3 preview images.
+These are `assets/shots/kcal/campaign-N.webp`, shown without a theme swap:
+the artwork already contains genuine light and dark interface captures. The
+app itself still supports both schemes. The page explicitly labels the gallery
+as an unreleased 1.3 preview while Apple review is pending. Original paired
+captures remain available; other apps keep their existing screenshot contracts.
+Kcal's header and sharing image use web-sized derivatives of the prepared
+brand artwork, following the header presentation already used by Form.
+
 ### Open Graph images
 
 `og.py` at the repo root generates `assets/og/home.png` and one
